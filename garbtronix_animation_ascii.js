@@ -174,6 +174,8 @@ Garbtronix.prototype.parseSchematic = function(data){
 					let frame   = scnData[1] || 0;   
 					let x       = parseInt(scnData[2]) || 0;
 					let y       = parseInt(scnData[3]) || 0;
+					let offsetY = y >= 0 ? 0 : Math.abs(y);
+					let offsetX = x >= 0 ? 0 : Math.abs(x);
 					console.log("Getting Object: "+objRef+" frame: "+frame+ " at "+x+","+y);
 					//console.log(objs[objRef]);
 					//Fill in Scene
@@ -185,9 +187,9 @@ Garbtronix.prototype.parseSchematic = function(data){
 					}
 					//Add Our Characters from object
 					let frame_ln = objs[objRef].frames[frame].split(/\r?\n/);
-					for(let ln=0;ln<frame_ln.length;ln++){
+					for(let ln=0+offsetY;ln<frame_ln.length;ln++){
 						let frame_ch = frame_ln[ln].split('');
-						for(let ch=0;ch<frame_ch.length;ch++){
+						for(let ch=0+offsetX;ch<frame_ch.length;ch++){
 							let cx = x+ch;
 							let cy = y+ln;
 							if(!currScn.data[cy]){currScn.data.push([]);}
