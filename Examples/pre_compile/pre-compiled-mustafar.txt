@@ -1,0 +1,606 @@
+**** Objects
+MustafarBack
+*
+** 0
+                          /`
+                         /``
+                    ---- ```
+~~~~~~~~~~~~~~~~~__/```````
+               ~/``       `
+               ~`       ```
+                ~` ````````
+                 ~``````````
+*** E
+AnakinRock
+*
+** 0
+```\~
+````|~
+____/~
+~~~~~
+*** E
+FarAnakin
+*
+** 0
+0 
+|)
+|\
+** 1
+    /
+uu<|0
+** 2
+ ((
+-^  
+ 0\
+** 3
+ 0|>nn
+ / 
+** 4
+  0 /
+ /V
+  ))
+** 5
+  0 /
+  V-
+  ))
+*** E
+FarObi
+*
+** 0
+  0 
+ /V/
+/( )
+** 1
+\0 
+-V'
+( )
+** 2
+(0(\ 
+-V'
+( )
+** 3
+ |
+(0( 
+-V'
+( )
+*** E 
+Divider
+*
+** 0
+___________________________
+*** E
+ItsOverAnakin
+*
+** 0
+It's
+** 1
+It's over
+** 2
+It's over Anakin.
+*** E
+IHaveTheHighGround
+*
+** 0
+I
+** 1
+I have
+** 2
+I have the
+** 3
+I have the High
+** 4
+I have the High Ground!
+*** E
+YouUnderestimateMyPower
+*
+** 0
+You
+** 1
+You underestimate
+** 2
+You underestimate my
+** 3
+You underestimate my POWER
+*** E
+Mouth
+*
+** 0
+-
+** 1
+O
+*** E
+ObiWanBody
+*
+** 0
+            ____
+          //---`\
+         //     ||
+         (| ~u~ |)
+          ~~~ ~~~
+       __--~~~~~-__
+   __--  \  \ /   __--__
+==o\__--\ \  \   /  --__|o
+         \U-----/
+         /------\
+*** E
+ObiWanEyes
+*
+** 0
+o o
+** 1
+- -
+*** E
+AnakinBody
+*
+** 0
+         ssssss
+        ssssssss
+       ss   ssssss
+      ss       sss
+      s(        ss
+       ss\____/s s
+     --/-| - ---_
+    /   \ \/| \  \
+   /____ \  / |   \
+  /     \ \/  |    |
+*** E
+AnakinEyes
+*
+** 0
+\
+O  O
+** 1
+\
+-  -
+*** E
+**** Scene
+//Anakin floats down the river
+* 5
+** Divider,0,0,1
+** MustafarBack,0,0,4
+** AnakinRock,0,-3,8
+** FarAnakin,0,-3,6
+** FarObi,1,22,5
+** Divider,0,0,12
+*** E
+* 5
+** Divider,0,0,1
+** MustafarBack,0,0,4
+** AnakinRock,0,-2,8
+** FarAnakin,0,-2,6
+** FarObi,1,22,5
+** Divider,0,0,12
+*** E
+* 5
+** Divider,0,0,1
+** MustafarBack,0,0,4
+** AnakinRock,0,-1,8
+** FarAnakin,0,-1,6
+** FarObi,1,22,5
+** Divider,0,0,12
+*** E
+* 15
+** Divider,0,0,1
+** MustafarBack,0,0,4
+** AnakinRock,0,0,8
+** FarAnakin,0,0,6
+** FarObi,1,22,5
+** Divider,0,0,12
+*** E
+* 15
+** Divider,0,0,1
+** MustafarBack,0,0,4
+** AnakinRock,0,0,8
+** FarAnakin,0,0,6
+** FarObi,0,21,5
+** Divider,0,0,12
+*** E
+// Obi Wan Close Up
+* 1
+** ItsOverAnakin,0,0,0
+** Divider,0,0,1
+** ObiWanBody,0,0,2
+** ObiWanEyes,0,12,4
+** Mouth,0,13,6
+** Divider,0,0,12
+*** E
+* 1
+** ItsOverAnakin,0,0,0
+** Divider,0,0,1
+** ObiWanBody,0,0,2
+** ObiWanEyes,0,12,4
+** Mouth,1,13,6
+** Divider,0,0,12
+*** E
+* 1
+** ItsOverAnakin,0,0,0
+** Divider,0,0,1
+** ObiWanBody,0,0,2
+** ObiWanEyes,0,12,4
+** Mouth,0,13,6
+** Divider,0,0,12
+*** E
+* 1
+** ItsOverAnakin,0,0,0
+** Divider,0,0,1
+** ObiWanBody,0,0,2
+** ObiWanEyes,0,12,4
+** Mouth,1,13,6
+** Divider,0,0,12
+*** E
+* 1
+** ItsOverAnakin,1,0,0
+** Divider,0,0,1
+** ObiWanBody,0,0,2
+** ObiWanEyes,0,12,4
+** Mouth,0,13,6
+** Divider,0,0,12
+*** E
+* 1
+** ItsOverAnakin,1,0,0
+** Divider,0,0,1
+** ObiWanBody,0,0,2
+** ObiWanEyes,0,12,4
+** Mouth,1,13,6
+** Divider,0,0,12
+*** E
+* 1
+** ItsOverAnakin,1,0,0
+** Divider,0,0,1
+** ObiWanBody,0,0,2
+** ObiWanEyes,0,12,4
+** Mouth,0,13,6
+** Divider,0,0,12
+*** E
+* 1
+** ItsOverAnakin,1,0,0
+** Divider,0,0,1
+** ObiWanBody,0,0,2
+** ObiWanEyes,0,12,4
+** Mouth,1,13,6
+** Divider,0,0,12
+*** E
+* 1
+** ItsOverAnakin,2,0,0
+** Divider,0,0,1
+** ObiWanBody,0,0,2
+** ObiWanEyes,1,12,4
+** Mouth,0,13,6
+** Divider,0,0,12
+*** E
+* 1
+** ItsOverAnakin,2,0,0
+** Divider,0,0,1
+** ObiWanBody,0,0,2
+** ObiWanEyes,0,12,4
+** Mouth,1,13,6
+** Divider,0,0,12
+*** E
+* 1
+** ItsOverAnakin,2,0,0
+** Divider,0,0,1
+** ObiWanBody,0,0,2
+** ObiWanEyes,1,12,4
+** Mouth,0,13,6
+** Divider,0,0,12
+*** E
+* 1
+** ItsOverAnakin,2,0,0
+** Divider,0,0,1
+** ObiWanBody,0,0,2
+** ObiWanEyes,0,12,4
+** Mouth,1,13,6
+** Divider,0,0,12
+*** E
+* 15
+** ItsOverAnakin,2,0,0
+** Divider,0,0,1
+** ObiWanBody,0,0,2
+** ObiWanEyes,0,12,4
+** Mouth,0,13,6
+** Divider,0,0,12
+*** E
+//TODO -- add I have the HIGH GROUND
+* 1
+** Divider,0,0,1
+** ObiWanBody,0,0,2
+** ObiWanEyes,0,12,4
+** Mouth,1,13,6
+** Divider,0,0,12
+** IHaveTheHighGround,0,0,13
+*** E
+* 1
+** Divider,0,0,1
+** ObiWanBody,0,0,2
+** ObiWanEyes,0,12,4
+** Mouth,0,13,6
+** Divider,0,0,12
+** IHaveTheHighGround,0,0,13
+*** E
+* 1
+** Divider,0,0,1
+** ObiWanBody,0,0,2
+** ObiWanEyes,0,12,4
+** Mouth,1,13,6
+** Divider,0,0,12
+** IHaveTheHighGround,1,0,13
+*** E
+* 1
+** Divider,0,0,1
+** ObiWanBody,0,0,2
+** ObiWanEyes,0,12,4
+** Mouth,0,13,6
+** Divider,0,0,12
+** IHaveTheHighGround,1,0,13
+*** E
+* 1
+** Divider,0,0,1
+** ObiWanBody,0,0,2
+** ObiWanEyes,0,12,4
+** Mouth,1,13,6
+** Divider,0,0,12
+** IHaveTheHighGround,2,0,13
+*** E
+* 1
+** Divider,0,0,1
+** ObiWanBody,0,0,2
+** ObiWanEyes,0,12,4
+** Mouth,0,13,6
+** Divider,0,0,12
+** IHaveTheHighGround,2,0,13
+*** E
+* 5
+** Divider,0,0,1
+** ObiWanBody,0,0,2
+** ObiWanEyes,0,12,4
+** Mouth,1,13,6
+** Divider,0,0,12
+** IHaveTheHighGround,3,0,13
+*** E
+* 1
+** Divider,0,0,1
+** ObiWanBody,0,0,2
+** ObiWanEyes,0,12,4
+** Mouth,0,13,6
+** Divider,0,0,12
+** IHaveTheHighGround,3,0,13
+*** E
+* 5
+** Divider,0,0,1
+** ObiWanBody,0,0,2
+** ObiWanEyes,0,12,4
+** Mouth,1,13,6
+** Divider,0,0,12
+** IHaveTheHighGround,4,0,13
+*** E
+* 15
+** Divider,0,0,1
+** ObiWanBody,0,0,2
+** ObiWanEyes,0,12,4
+** Mouth,0,13,6
+** Divider,0,0,12
+** IHaveTheHighGround,4,0,13
+*** E
+// Anakin tells Obi Wan you underestimate my power
+* 5
+** Divider,0,0,1
+** AnakinBody,0,0,2
+** AnakinEyes,0,10,4
+** Mouth,0,12,6
+** Divider,0,0,12
+*** E
+* 1
+** YouUnderestimateMyPower,0,0,0
+** Divider,0,0,1
+** AnakinBody,0,0,2
+** AnakinEyes,0,10,4
+** Mouth,0,12,6
+** Divider,0,0,12
+*** E
+* 1
+** YouUnderestimateMyPower,0,0,0
+** Divider,0,0,1
+** AnakinBody,0,0,2
+** AnakinEyes,0,10,4
+** Mouth,1,12,6
+** Divider,0,0,12
+*** E
+* 1
+** YouUnderestimateMyPower,0,0,0
+** Divider,0,0,1
+** AnakinBody,0,0,2
+** AnakinEyes,0,10,4
+** Mouth,0,12,6
+** Divider,0,0,12
+*** E
+* 1
+** YouUnderestimateMyPower,1,0,0
+** Divider,0,0,1
+** AnakinBody,0,0,2
+** AnakinEyes,0,10,4
+** Mouth,0,12,6
+** Divider,0,0,12
+*** E
+* 1
+** YouUnderestimateMyPower,1,0,0
+** Divider,0,0,1
+** AnakinBody,0,0,2
+** AnakinEyes,0,10,4
+** Mouth,1,12,6
+** Divider,0,0,12
+*** E
+* 1
+** YouUnderestimateMyPower,1,0,0
+** Divider,0,0,1
+** AnakinBody,0,0,2
+** AnakinEyes,0,10,4
+** Mouth,0,12,6
+** Divider,0,0,12
+*** E
+* 1
+** YouUnderestimateMyPower,2,0,0
+** Divider,0,0,1
+** AnakinBody,0,0,2
+** AnakinEyes,0,10,4
+** Mouth,0,12,6
+** Divider,0,0,12
+*** E
+* 1
+** YouUnderestimateMyPower,2,0,0
+** Divider,0,0,1
+** AnakinBody,0,0,2
+** AnakinEyes,0,10,4
+** Mouth,1,12,6
+** Divider,0,0,12
+*** E
+* 1
+** YouUnderestimateMyPower,2,0,0
+** Divider,0,0,1
+** AnakinBody,0,0,2
+** AnakinEyes,0,10,4
+** Mouth,0,12,6
+** Divider,0,0,12
+*** E
+* 1
+** YouUnderestimateMyPower,2,0,0
+** Divider,0,0,1
+** AnakinBody,0,0,2
+** AnakinEyes,0,10,4
+** Mouth,0,12,6
+** Divider,0,0,12
+*** E
+* 1
+** YouUnderestimateMyPower,2,0,0
+** Divider,0,0,1
+** AnakinBody,0,0,2
+** AnakinEyes,0,10,4
+** Mouth,1,12,6
+** Divider,0,0,12
+*** E
+* 1
+** YouUnderestimateMyPower,2,0,0
+** Divider,0,0,1
+** AnakinBody,0,0,2
+** AnakinEyes,0,10,4
+** Mouth,0,12,6
+** Divider,0,0,12
+*** E
+* 3
+** YouUnderestimateMyPower,3,0,0
+** Divider,0,0,1
+** AnakinBody,0,0,2
+** AnakinEyes,0,10,4
+** Mouth,1,12,6
+** Divider,0,0,12
+*** E
+* 1
+** YouUnderestimateMyPower,3,0,0
+** Divider,0,0,1
+** AnakinBody,0,0,2
+** AnakinEyes,0,10,4
+** Mouth,0,12,6
+** Divider,0,0,12
+*** E
+* 3
+** YouUnderestimateMyPower,3,0,0
+** Divider,0,0,1
+** AnakinBody,0,0,2
+** AnakinEyes,0,10,4
+** Mouth,1,12,6
+** Divider,0,0,12
+*** E
+* 15
+** YouUnderestimateMyPower,3,0,0
+** Divider,0,0,1
+** AnakinBody,0,0,2
+** AnakinEyes,0,10,4
+** Mouth,0,12,6
+** Divider,0,0,12
+*** E
+// The Jump
+* 30
+** Divider,0,0,1
+** MustafarBack,0,0,4
+** AnakinRock,0,1,8
+** FarAnakin,0,1,6
+** FarObi,0,21,5
+** Divider,0,0,12
+*** E
+* 30
+** Divider,0,0,1
+** MustafarBack,0,0,4
+** AnakinRock,0,1,8
+** FarAnakin,4,2,5
+** FarObi,0,21,5
+** Divider,0,0,12
+*** E
+* 30
+** Divider,0,0,1
+** MustafarBack,0,0,4
+** AnakinRock,0,1,8
+** FarAnakin,4,2,4
+** FarObi,0,21,5
+** Divider,0,0,12
+*** E
+* 30
+** Divider,0,0,1
+** MustafarBack,0,0,4
+** AnakinRock,0,1,8
+** FarAnakin,1,3,3
+** FarObi,0,21,5
+** Divider,0,0,12
+*** E
+* 30
+** Divider,0,0,1
+** MustafarBack,0,0,4
+** AnakinRock,0,1,8
+** FarAnakin,2,5,3
+** FarObi,1,22,5
+** Divider,0,0,12
+*** E
+* 30
+** Divider,0,0,1
+** MustafarBack,0,0,4
+** AnakinRock,0,1,8
+** FarAnakin,4,5,2
+** FarObi,1,22,5
+** Divider,0,0,12
+*** E
+* 30
+** Divider,0,0,1
+** MustafarBack,0,0,4
+** AnakinRock,0,1,8
+** FarAnakin,3,6,2
+** FarObi,1,22,5
+** Divider,0,0,12
+*** E
+* 30
+** Divider,0,0,1
+** MustafarBack,0,0,4
+** AnakinRock,0,1,8
+** FarAnakin,4,9,3
+** FarObi,1,22,5
+** Divider,0,0,12
+* 30
+** Divider,0,0,1
+** MustafarBack,0,0,4
+** AnakinRock,0,1,8
+** FarAnakin,5,10,4
+** FarObi,2,22,5
+** Divider,0,0,12
+* 1
+** Divider,0,0,1
+** MustafarBack,0,0,4
+** AnakinRock,0,1,8
+** FarAnakin,5,11,5
+** FarObi,2,22,5
+** Divider,0,0,12
+*** E
+* 1
+** Divider,0,0,1
+** MustafarBack,0,0,4
+** AnakinRock,0,1,8
+** FarAnakin,5,11,5
+** FarObi,3,22,5
+** Divider,0,0,12
+*** E
