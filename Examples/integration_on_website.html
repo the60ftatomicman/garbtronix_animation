@@ -19,6 +19,11 @@
 			//First we need an object to represent our animation
 			//You'll need one per animation file
 			//If you wanna direct your animation to a SPECIFIC div, provide that as a second parameter
+			// Defaults to #screen
+			//If you want to bound your animation in parse schematic, pass in a third parameter as such {x:undefined,y:undefined}
+			// x == how many columns, leave undefined if you don't care
+			// y == how many rows, leave undefined if you don't care
+			//
 			garb = new Garbtronix('http://localhost/post_compile/example.txt');
 			garb.load(); // uses jquery .get call to grab data for animation.
 			garb.play(); // runs a setInterval ever 66 ms for about 15 frames a second

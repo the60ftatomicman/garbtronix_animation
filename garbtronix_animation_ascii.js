@@ -1,5 +1,5 @@
 console.log('Welcome to the Grid');
-var Garbtronix = function(url,sId){
+var Garbtronix = function(url,sId,b){
 		this.frames = {
 			count  :0,
 			current:0
@@ -13,6 +13,10 @@ var Garbtronix = function(url,sId){
 			metaSplit :',',
 			schematicSection : '****'
 		};
+		this.bounds     = {
+			x: b ? b.x : undefined,
+			y: b ? b.y : undefined
+		}
 		this.frameDelay = 66; // 15ish frames a second.
 		this.screenId   = sId || '#screen';
 		this.sourceURL  = url || '';
@@ -174,8 +178,8 @@ Garbtronix.prototype.parseSchematic = function(data){
 					let frame   = scnData[1] || 0;   
 					let x       = parseInt(scnData[2]) || 0;
 					let y       = parseInt(scnData[3]) || 0;
-					let offsetY = y >= 0 ? 0 : Math.abs(y);
-					let offsetX = x >= 0 ? 0 : Math.abs(x);
+					let offsetX = x >  0 ? 0 : Math.abs(x);
+					let offsetY = y >  0 ? 0 : Math.abs(y);
 					console.log("Getting Object: "+objRef+" frame: "+frame+ " at "+x+","+y);
 					//console.log(objs[objRef]);
 					//Fill in Scene
@@ -187,19 +191,26 @@ Garbtronix.prototype.parseSchematic = function(data){
 					}
 					//Add Our Characters from object
 					let frame_ln = objs[objRef].frames[frame].split(/\r?\n/);
-					for(let ln=0+offsetY;ln<frame_ln.length;ln++){
-						let frame_ch = frame_ln[ln].split('');
-						for(let ch=0+offsetX;ch<frame_ch.length;ch++){
-							let cx = x+ch;
-							let cy = y+ln;
-							if(!currScn.data[cy]){currScn.data.push([]);}
-							currScn.data[cy][cx] = frame_ch[ch];
+					for(let ln=0+offsetY;ln<=frame_ln.length;ln++){
+						if(frame_ln[ln]!=undefined){
+							let frame_ch = frame_ln[ln].split('');
+							for(let ch=0+offsetX;ch<frame_ch.length;ch++){
+								let cx = x+ch;
+								let cy = y+ln;
+								if(!currScn.data[cy]){currScn.data.push([]);}
+								currScn.data[cy][cx] = frame_ch[ch];
+							}
 						}
 					}
 					//Join -- I hate to rebuild this string EACH time but fuuuudge it it works
 					currScn.text = '';
-					for(let fd=0;fd<currScn.data.length;fd++){
-						currScn.text += currScn.data[fd].join('').replace(/,/g,'')+this.symbols.newline;
+					var maxLineLength = this.bounds.y || currScn.data.length;
+					for(let fd=0;fd<maxLineLength;fd++){
+						if(currScn.data[fd]){
+							var maxCharLength = this.bounds.x || currScn.data[fd].length || 10000;
+							currScn.text += currScn.data[fd].slice(0,maxCharLength).join('').replace(/,/g,'');
+							currScn.text += this.symbols.newline
+						}
 					}
 				}
 			}
