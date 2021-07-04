@@ -163,29 +163,89 @@ Garbtronix.prototype.parseSchematic = function(data){
 	for(let i=idxs.scene;i<anim_data.length;i++){
 		console.log(i);
 		if(anim_data[i].match(/^(\*{1} R)/)){
-			//Repeat
-			//let repeat_range = anim_data[i].split('R,')[1].split(',') || [scns.length-1,scns.length];
-			let repeat_range = anim_data[i].split('R ')[1];
+			//Repeat if designated as repeater
+			//
+			let repeat_loops = anim_data[i].split('L ')[1];
+			repeat_loops = repeat_loops ? parseInt(repeat_loops) : 1;
+			//
+			let repeat_range = anim_data[i].split('L ')[0].split('R ')[1];
 			repeat_range = repeat_range ? repeat_range.split(',') : [scns.length-1,scns.length-1];
+			
 			let repeat_start = repeat_range[0] != '' ? parseInt(repeat_range[0]) : scns.length-1;
+			if(repeat_start >= scns.length){
+				console.log('Invalid start length!');
+			}
 			let repeat_end   = repeat_range[1] != '' ? parseInt(repeat_range[1]) : repeat_start;
+			if(repeat_end >= scns.length){
+				console.log('Invalid end length!');
+			}
 			//If we omitted or run into a weird issue just set to one away so we repeat the first index
 			repeat_end = repeat_end || repeat_start;
-			for(let r=repeat_start;r<=repeat_end;r++){
-				scns.push(scns[r]);
+			console.log('Repeating ['+repeat_start+'] to ['+repeat_end+']: ['+repeat_loops+'] times');
+			for(let l=0;l<repeat_loops;l++){
+				for(let r=repeat_start;r<=repeat_end;r++){
+					scns.push(scns[r]);
+				}
 			}
+		}else if(anim_data[i].match(/^(\*{1} M)/)){
+			//Modify (shift) last scene
+			//
+			let scene = scns[scns.length -1];
+			let modify_data = anim_data[i].split('') || [];
+			if (modify_data != []){
+				// X or Y
+				let modify_coord = modify_data[3] || '';
+				//P or N for Positive or Negative. Assumed Posituve
+				let modify_dir = modify_data[4] == 'N' ? -1:1;
+				//numeric value or 1
+				let modify_amt = parseInt(modify_data.slice(5).join('')) || 1;
+				//If we were given a coord
+				if(modify_coord != ''){
+					for(let l=1;l<=modify_amt;l++){
+						let new_scene = {
+							count: scene.count,
+							data : [[]],
+							instr: scene.instr,
+							text : ''
+						};
+						for(let s=0;s<scene.instr.length;s++){
+							//TODO Test!! Should "work"
+							let scnData = scene.instr[s].split(' ')[1].split(',');
+							let objRef  = scnData[0];
+							let frame   = scnData[1] || 0;   
+							let x       = parseInt(scnData[2]) || 0;
+							let y       = parseInt(scnData[3]) || 0;
+							x = modify_coord == 'X' ? x+(l*modify_dir) : x;
+							y = modify_coord == 'Y' ? y+(l*modify_dir) : y;
+							let offsetX = x >  0 ? 0 : Math.abs(x);
+							let offsetY = y >  0 ? 0 : Math.abs(y);
+							console.log("Getting Object: "+objRef+" frame: "+frame+ " at "+x+","+y);
+							//console.log(objs[objRef]);
+							this.fillScene(y,x,new_scene);
+							//Add Our Characters from object
+							this.fillCharacters(objs,objRef,frame,offsetY,offsetX,x,y,new_scene);
+							//Join -- I hate to rebuild this string EACH time but fuuuudge it it works
+							this.buildText(new_scene)
+						}
+						scns.push(new_scene);
+					}
+				}
+			}
+
 		}else if(anim_data[i].match(/^\*{1} [0-9]{1,}$/)){
 			//Brand new scene!
 			let scene_count = anim_data[i].split(' ')[1] || 1;
 			scns.push({
 				count: scene_count,
 				data : [[]],
+				instr: [],
 				text : ''
 			})
 			console.log('Line '+i+' Count '+scene_count);
 			for(let j=i;j<anim_data.length;j+=anim_data[j].match(/^\*{3} E/)?anim_data.length:1){
 				if(anim_data[j].match(/^\*{2} /)){
 					let currScn = scns[scns.length-1];
+					currScn.instr.push(anim_data[j]);
 					let scnData = anim_data[j].split(' ')[1].split(',');
 					let objRef  = scnData[0];
 					let frame   = scnData[1] || 0;   
@@ -195,38 +255,11 @@ Garbtronix.prototype.parseSchematic = function(data){
 					let offsetY = y >  0 ? 0 : Math.abs(y);
 					console.log("Getting Object: "+objRef+" frame: "+frame+ " at "+x+","+y);
 					//console.log(objs[objRef]);
-					//Fill in Scene
-					for(let cy=0;cy<=y;cy++){
-						if(!currScn.data[cy]){currScn.data.push([]);}
-						for(let cx=0;cx<=x;cx++){
-							if(!currScn.data[cy][cx]){currScn.data[cy].push(' ');}							
-						}
-					}
+					this.fillScene(y,x,currScn);
 					//Add Our Characters from object
-					var escaped_frame = objs[objRef].frames[frame];
-					let frame_ln = objs[objRef].frames[frame].replace(/\\/g,"\\").split(/\r?\n/);
-					for(let ln=0+offsetY;ln<=frame_ln.length;ln++){
-						if(frame_ln[ln]!=undefined){
-							let frame_ch = frame_ln[ln].split('');
-							for(let ch=0+offsetX;ch<frame_ch.length;ch++){
-								let cx = x+ch;
-								let cy = y+ln;
-								if(!currScn.data[cy]){currScn.data.push([]);}
-								currScn.data[cy][cx] = frame_ch[ch];
-							}
-
-						}
-					}
+					this.fillCharacters(objs,objRef,frame,offsetY,offsetX,x,y,currScn);
 					//Join -- I hate to rebuild this string EACH time but fuuuudge it it works
-					currScn.text = '';
-					var maxLineLength = this.bounds.y || currScn.data.length;
-					for(let fd=0;fd<maxLineLength;fd++){
-						if(currScn.data[fd]){
-							var maxCharLength = this.bounds.x || currScn.data[fd].length || 10000;
-							currScn.text += currScn.data[fd].slice(0,maxCharLength).join('').replace(/,/g,'');
-							currScn.text += this.symbols.newline
-						}
-					}
+					this.buildText(currScn)
 				}
 			}
 		}
@@ -245,4 +278,40 @@ Garbtronix.prototype.parseSchematic = function(data){
 		output += '**\r\n';
 	}
 	console.log(output);
+}
+Garbtronix.prototype.fillScene = function(y,x,currScn){
+	//Fills in blank spaces to populate later. May not necessarily be needed.
+	for(let cy=0;cy<=y;cy++){
+		if(!currScn.data[cy]){currScn.data.push([]);}
+		for(let cx=0;cx<=x;cx++){
+			if(!currScn.data[cy][cx]){currScn.data[cy].push(' ');}							
+		}
+	}
+}
+Garbtronix.prototype.fillCharacters = function(objs,objRef,frame,offsetY,offsetX,x,y,currScn){
+		var escaped_frame = objs[objRef].frames[frame];
+		let frame_ln = objs[objRef].frames[frame].replace(/\\/g,"\\").split(/\r?\n/);
+		for(let ln=0+offsetY;ln<=frame_ln.length;ln++){
+			if(frame_ln[ln]!=undefined){
+				let frame_ch = frame_ln[ln].split('');
+				for(let ch=0+offsetX;ch<frame_ch.length;ch++){
+					let cx = x+ch;
+					let cy = y+ln;
+					if(!currScn.data[cy]){currScn.data.push([]);}
+					currScn.data[cy][cx] = frame_ch[ch];
+				}
+
+			}
+		}
+}
+Garbtronix.prototype.buildText = function(currScn){
+	currScn.text = '';
+	var maxLineLength = this.bounds.y || currScn.data.length;
+	for(let fd=0;fd<maxLineLength;fd++){
+		if(currScn.data[fd]){
+			var maxCharLength = this.bounds.x || currScn.data[fd].length || 10000;
+			currScn.text += currScn.data[fd].slice(0,maxCharLength).join('').replace(/,/g,'');
+			currScn.text += this.symbols.newline
+		}
+	}
 }
