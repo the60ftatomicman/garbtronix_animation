@@ -187,8 +187,8 @@ Garbtronix.prototype.parseSchematic = function(data){
 					scns.push(scns[r]);
 				}
 			}
-		}else if(anim_data[i].match(/^(\*{1} M)/)){
-			//Modify (shift) last scene
+		}else if(anim_data[i].match(/^(\*{1} S)/)){
+			//shift last scene
 			//
 			let scene = scns[scns.length -1];
 			let modify_data = anim_data[i].split('') || [];
@@ -209,7 +209,6 @@ Garbtronix.prototype.parseSchematic = function(data){
 							text : ''
 						};
 						for(let s=0;s<scene.instr.length;s++){
-							//TODO Test!! Should "work"
 							let scnData = scene.instr[s].split(' ')[1].split(',');
 							let objRef  = scnData[0];
 							let frame   = scnData[1] || 0;   
@@ -225,14 +224,78 @@ Garbtronix.prototype.parseSchematic = function(data){
 							//Add Our Characters from object
 							this.fillCharacters(objs,objRef,frame,offsetY,offsetX,x,y,new_scene);
 							//Join -- I hate to rebuild this string EACH time but fuuuudge it it works
-							this.buildText(new_scene)
+							this.buildText(new_scene);
 						}
 						scns.push(new_scene);
 					}
 				}
 			}
 
-		}else if(anim_data[i].match(/^\*{1} [0-9]{1,}$/)){
+		}else if(anim_data[i].match(/^(\*{1} M)/)){
+			//Move specific indexes from last scene. this is "modify"
+			let scene               = scns[scns.length -1];
+			let modify_instructions = [];
+			let modify_amt          = parseInt(anim_data[i].slice(3)) || 1;
+			//Get all of our instructions
+			for(let j=i+1;j<anim_data.length;j+=anim_data[j].match(/^\*{3} E/) ? anim_data.length : 1){
+				//compile all instructions...gunna have to do this all dirty like.
+				if(!anim_data[j].match(/^\*{3} E/)){
+					//** 2XP10
+					let coord_position = anim_data[j].indexOf('X') > -1 ? anim_data[j].indexOf('X') : anim_data[j].indexOf('Y');
+					modify_instructions.push({
+						idx: anim_data[j].slice(3,coord_position),
+						coord: anim_data[j][coord_position],
+						dir: anim_data[j][coord_position+1] == 'N' ? -1 : 1,
+						delta: parseInt(anim_data[j].slice(coord_position+2)),
+						text: ''
+					});
+				}
+			}
+			//Now build scenes
+			for(let l=1;l<=modify_amt;l++){
+				let new_scene = {
+					count: scene.count,
+					data : [[]],
+					instr: scene.instr,
+					text : ''
+				};
+				//Do instruction replacement
+				modify_instructions_idx = 0;
+				for(let s=0;s<new_scene.instr.length;s++){
+					let split_data = new_scene.instr[s].split(',');
+					if(modify_instructions[modify_instructions_idx] && s == modify_instructions[modify_instructions_idx].idx){
+						let delta = (modify_instructions[modify_instructions_idx].dir * modify_instructions[modify_instructions_idx].delta) * l;
+						if(modify_instructions[modify_instructions_idx].coord == 'X'){
+							split_data[2] = (parseInt(split_data[2])+delta).toString();
+						}
+						if(modify_instructions[modify_instructions_idx].coord == 'Y'){
+							split_data[3] = (parseInt(split_data[3])+delta).toString();
+						}
+						new_scene.instr[s] = split_data.join(',');
+						modify_instructions_idx++;
+					}
+					//Now do the classical scene add
+					let scnData = new_scene.instr[s].split(' ')[1].split(',');
+					let objRef  = scnData[0];
+					let frame   = scnData[1] || 0;   
+					let x       = parseInt(scnData[2]) || 0;
+					let y       = parseInt(scnData[3]) || 0;
+					let offsetX = x >  0 ? 0 : Math.abs(x);
+					let offsetY = y >  0 ? 0 : Math.abs(y);
+					console.log("Getting Object: "+objRef+" frame: "+frame+ " at "+x+","+y);
+					//console.log(objs[objRef]);
+					this.fillScene(y,x,new_scene);
+					//Add Our Characters from object
+					this.fillCharacters(objs,objRef,frame,offsetY,offsetX,x,y,new_scene);
+					//Join -- I hate to rebuild this string EACH time but fuuuudge it it works
+					this.buildText(new_scene);
+				}
+				scns.push(new_scene);
+			}
+			//Now loop again and push scenes
+			
+		}
+		else if(anim_data[i].match(/^\*{1} [0-9]{1,}$/)){
 			//Brand new scene!
 			let scene_count = anim_data[i].split(' ')[1] || 1;
 			scns.push({
