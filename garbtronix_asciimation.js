@@ -165,10 +165,13 @@ Garbtronix.prototype.parseSchematic = function(data){
 		if(anim_data[i].match(/^(\*{1} R)/)){
 			//Repeat if designated as repeater
 			//
-			let repeat_loops = anim_data[i].split('L ')[1];
+			let repeat_count = anim_data[i].split('C ')[1];
+			repeat_count = repeat_count ? parseInt(repeat_count) : undefined; // use previous if not designated
+			//
+			let repeat_loops = repeat_count[0] ? repeat_count[0].split('L ')[1] : anim_data[i].split('L ')[1];
 			repeat_loops = repeat_loops ? parseInt(repeat_loops) : 1;
 			//
-			let repeat_range = anim_data[i].split('L ')[0].split('R ')[1];
+			let repeat_range = repeat_loops[0] ? repeat_loops[0].split('R ')[1] : anim_data[i].split('R ')[1];
 			repeat_range = repeat_range ? repeat_range.split(',') : [scns.length-1,scns.length-1];
 			
 			let repeat_start = repeat_range[0] != '' ? parseInt(repeat_range[0]) : scns.length-1;
@@ -184,7 +187,12 @@ Garbtronix.prototype.parseSchematic = function(data){
 			console.log('Repeating ['+repeat_start+'] to ['+repeat_end+']: ['+repeat_loops+'] times');
 			for(let l=0;l<repeat_loops;l++){
 				for(let r=repeat_start;r<=repeat_end;r++){
-					scns.push(scns[r]);
+					scns.push({
+						count: repeat_count || scns[r].count,
+						data : scns[r].data,
+						instr: scns[r].instr,
+						text : scns[r].text
+					});
 				}
 			}
 		}else if(anim_data[i].match(/^(\*{1} S)/)){
@@ -246,8 +254,8 @@ Garbtronix.prototype.parseSchematic = function(data){
 						idx: anim_data[j].slice(3,coord_position),
 						coord: anim_data[j][coord_position],
 						dir: anim_data[j][coord_position+1] == 'N' ? -1 : 1,
-						delta: parseInt(anim_data[j].slice(coord_position+2)),
-						text: ''
+						delta: parseInt(anim_data[j].slice(coord_position+2))
+						//text: ''
 					});
 				}
 			}
@@ -264,7 +272,7 @@ Garbtronix.prototype.parseSchematic = function(data){
 				for(let s=0;s<new_scene.instr.length;s++){
 					let split_data = new_scene.instr[s].split(',');
 					if(modify_instructions[modify_instructions_idx] && s == modify_instructions[modify_instructions_idx].idx){
-						let delta = (modify_instructions[modify_instructions_idx].dir * modify_instructions[modify_instructions_idx].delta) * l;
+						let delta = (modify_instructions[modify_instructions_idx].dir * modify_instructions[modify_instructions_idx].delta);
 						if(modify_instructions[modify_instructions_idx].coord == 'X'){
 							split_data[2] = (parseInt(split_data[2])+delta).toString();
 						}
@@ -344,12 +352,12 @@ Garbtronix.prototype.parseSchematic = function(data){
 }
 Garbtronix.prototype.fillScene = function(y,x,currScn){
 	//Fills in blank spaces to populate later. May not necessarily be needed.
-	for(let cy=0;cy<=y;cy++){
+	/*for(let cy=0;cy<=y;cy++){
 		if(!currScn.data[cy]){currScn.data.push([]);}
 		for(let cx=0;cx<=x;cx++){
 			if(!currScn.data[cy][cx]){currScn.data[cy].push(' ');}							
 		}
-	}
+	}*/
 }
 Garbtronix.prototype.fillCharacters = function(objs,objRef,frame,offsetY,offsetX,x,y,currScn){
 		var escaped_frame = objs[objRef].frames[frame];
@@ -360,7 +368,8 @@ Garbtronix.prototype.fillCharacters = function(objs,objRef,frame,offsetY,offsetX
 				for(let ch=0+offsetX;ch<frame_ch.length;ch++){
 					let cx = x+ch;
 					let cy = y+ln;
-					if(!currScn.data[cy]){currScn.data.push([]);}
+					while(!currScn.data[cy]){currScn.data.push([]);}
+					while(!currScn.data[cy][cx]){currScn.data[cy].push(' ');}
 					currScn.data[cy][cx] = frame_ch[ch];
 				}
 
