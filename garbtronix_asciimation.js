@@ -250,12 +250,14 @@ Garbtronix.prototype.parseSchematic = function(data){
 				if(!anim_data[j].match(/^\*{3} E/)){
 					//** 2XP10
 					let coord_position = anim_data[j].indexOf('X') > -1 ? anim_data[j].indexOf('X') : anim_data[j].indexOf('Y');
+                    let frame_position = anim_data[j].indexOf('F');
+                    let dir_position   = coord_position+1;
 					modify_instructions.push({
-						idx: anim_data[j].slice(3,coord_position),
+						idx:   frame_position > -1 ? anim_data[j].slice(3,frame_position) : anim_data[j].slice(3,coord_position),
 						coord: anim_data[j][coord_position],
-						dir: anim_data[j][coord_position+1] == 'N' ? -1 : 1,
-						delta: parseInt(anim_data[j].slice(coord_position+2))
-						//text: ''
+                        frame: frame_position > -1 ? anim_data[j].slice(frame_position+1,coord_position) : -1,
+						dir:   anim_data[j][dir_position] == 'N' ? -1 : 1,
+						delta: parseInt(anim_data[j].slice(dir_position+1))
 					});
 				}
 			}
@@ -273,9 +275,15 @@ Garbtronix.prototype.parseSchematic = function(data){
 					let split_data = new_scene.instr[s].split(',');
 					if(modify_instructions[modify_instructions_idx] && s == modify_instructions[modify_instructions_idx].idx){
 						let delta = (modify_instructions[modify_instructions_idx].dir * modify_instructions[modify_instructions_idx].delta);
-						if(modify_instructions[modify_instructions_idx].coord == 'X'){
+						//Modify Frame
+                        if(modify_instructions[modify_instructions_idx].frame > -1){
+							split_data[1] = modify_instructions[modify_instructions_idx].frame;
+						}
+                        //Modify X
+                        if(modify_instructions[modify_instructions_idx].coord == 'X'){
 							split_data[2] = (parseInt(split_data[2])+delta).toString();
 						}
+                        //ModifyY
 						if(modify_instructions[modify_instructions_idx].coord == 'Y'){
 							split_data[3] = (parseInt(split_data[3])+delta).toString();
 						}
