@@ -168,7 +168,7 @@ Garbtronix.prototype.parseSchematic = function(data){
 			let repeat_count = anim_data[i].split('C ')[1];
 			repeat_count = repeat_count ? parseInt(repeat_count) : undefined; // use previous if not designated
 			//
-			let repeat_loops = repeat_count[0] ? repeat_count[0].split('L ')[1] : anim_data[i].split('L ')[1];
+			let repeat_loops = anim_data[i].split('L ')[1].split('C ')[0].trim();
 			repeat_loops = repeat_loops ? parseInt(repeat_loops) : 1;
 			//
 			let repeat_range = repeat_loops[0] ? repeat_loops[0].split('R ')[1] : anim_data[i].split('R ')[1];
