@@ -1,0 +1,127 @@
+**** Objects
+backDrop
+*
+** 0                         
+                                                  
+                                                  
+                                                  
+                                                  
+                                                  
+                                                  
+                                                  
+                                                  
+                                                  
+                                                  
+                                                  
+                                                          
+** 1
+------------------------------------
+** 2
+                                                                     
+                                                                    
+*** E
+phrases
+*
+** 0
+Lukashenko, Do you see all this land 
+that the mud touches?
+** 1
+Da
+** 2
+This, is our kingdom.
+*** E
+Lukashenko
+*
+** 0
+      _____
+    `       ` 
+   ` __   __ ` 
+  ⁅|  - | -  |⁆ 
+   |    V    |
+    \       /
+(---| -___- |---)
+|   | / V \ |   |
+|  Y  \ | /  Y  |
+|  |   \|/   |  |
+** 1
+// \\
+** 2
+//o\\ 
+*** E
+Putin
+*
+** 0
+      _____ 
+    / -___- \  
+   |   ___   |
+  ⁅|   o|o   |⁆ 
+   |    ⅄    |
+    \       /
+/---| -___- |---\
+|   | / V \ |   |  
+| Y   \/*\/   Y |   
+| |    \*/    | |  
+** 1
+[---]
+** 2
+[===]
+*** E
+#
+#
+#
+**** Scene
+// ----------- Lukashenko, do you see all the land the mud touches?
+* 2
+** backDrop,0,0,0
+** backDrop,1,0,10
+** Putin,0,0,0
+** Putin,1,6,5 // mouth closed
+** Lukashenko,0,18,0
+** Lukashenko,1,24,5
+** phrases,0,0,11
+*** E
+* M
+** 3F2XN0
+*** E
+* R 0,1 L 3 C 2
+*** E
+// ---------- Pause
+* 4
+** backDrop,0,0,0
+** backDrop,1,0,10
+** Putin,0,0,0
+** Putin,1,6,5 // mouth closed
+** Lukashenko,0,18,0
+** Lukashenko,1,24,5
+*** E
+// ---------- Da
+* 3
+** backDrop,0,0,0
+** backDrop,1,0,10
+** Putin,0,0,0
+** Putin,1,6,5 // mouth closed
+** Lukashenko,0,18,0
+** Lukashenko,2,24,5
+** phrases,1,25,11
+*** E
+// ---------- Pause (gets to frame 10)
+* R 8,8 L 1 C 4
+*** E
+// ---------- This, is our kingdom!
+* 2
+** backDrop,0,0,0
+** backDrop,1,0,10
+** Putin,0,0,0
+** Putin,1,6,5 // mouth closed
+** Lukashenko,0,18,0
+** Lukashenko,1,24,5
+** phrases,2,0,11
+*** E
+* M
+** 3F2XN0
+*** E
+* R 11,12 L 3 C 2
+*** E
+// ---------- Da and Pause
+* R 8,10 L 1
+*** E

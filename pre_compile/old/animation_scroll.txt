@@ -1,0 +1,152 @@
+0,1
+*
+            
+**
+1,1
+*
+            
+**
+2,1
+*
+           T
+**
+3,1
+*
+          Th
+**
+4,1
+*
+         Thi
+**
+5,1
+*
+        This
+**
+6,1
+*
+       This 
+**
+7,1
+*
+      This I
+**
+8,1
+*
+     This Is
+**
+9,1
+*
+    This Is 
+**
+10,1
+*
+   This Is A
+**
+11,1
+*
+  This Is A 
+**
+12,1
+*
+ This Is A S
+**
+13,1
+*
+This Is A Sc
+**
+14,1
+*
+his Is A Scr
+**
+15,1
+*
+is Is A Scro
+**
+16,1
+*
+s Is A Scrol
+**
+17,1
+*
+ Is A Scroll
+**
+18,1
+*
+Is A Scrolli
+**
+19,1
+*
+s A Scrollin
+**
+20,1
+*
+ A Scrolling
+**
+21,1
+*
+A Scrolling 
+**
+22,1
+*
+ Scrolling D
+**
+23,1
+*
+Scrolling De
+**
+24,1
+*
+crolling Dem
+**
+25,1
+*
+rolling Demo
+**
+26,1
+*
+olling Demo
+**
+27,1
+*
+lling Demo
+**
+28,1
+*
+ling Demo
+**
+29,1
+*
+ing Demo
+**
+30,1
+*
+ng Demo
+**
+31,1
+*
+g Demo
+**
+32,1
+*
+ Demo
+**
+33,1
+*
+Demo
+**
+34,1
+*
+emo
+**
+35,1
+*
+mo
+**
+36,1
+*
+o
+**
+37,1
+*
+
+**
