@@ -243,7 +243,8 @@ Garbtronix.prototype.parseSchematic = function(data){
 			//Move specific indexes from last scene. this is "modify"
 			let scene               = scns[scns.length -1];
 			let modify_instructions = [];
-			let modify_amt          = parseInt(anim_data[i].slice(3)) || 1;
+			let modify_amt          = parseInt(anim_data[i].split(/(\s+){1,}/)[4]) || 1;
+            let modify_count        = parseInt(anim_data[i].split(/(\s+){1,}/)[6]) || scene.count;
 			//Get all of our instructions
 			for(let j=i+1;j<anim_data.length;j+=anim_data[j].match(/^\*{3} E/) ? anim_data.length : 1){
 				//compile all instructions...gunna have to do this all dirty like.
@@ -264,7 +265,7 @@ Garbtronix.prototype.parseSchematic = function(data){
 			//Now build scenes
 			for(let l=1;l<=modify_amt;l++){
 				let new_scene = {
-					count: scene.count,
+					count: modify_count,
 					data : [[]],
 					instr: scene.instr,
 					text : ''
@@ -390,7 +391,8 @@ Garbtronix.prototype.buildText = function(currScn){
 	for(let fd=0;fd<maxLineLength;fd++){
 		if(currScn.data[fd]){
 			var maxCharLength = this.bounds.x || currScn.data[fd].length || 10000;
-			currScn.text += currScn.data[fd].slice(0,maxCharLength).join('').replace(/,/g,'');
+			//currScn.text += currScn.data[fd].slice(0,maxCharLength).join('').replace(/,/g,''); // WHY DID I DO THIS?... sometimes I want commas!
+            currScn.text += currScn.data[fd].slice(0,maxCharLength).join('');
 			currScn.text += this.symbols.newline
 		}
 	}
