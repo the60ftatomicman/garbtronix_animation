@@ -1,0 +1,33 @@
+**** Objects
+backDrop
+*
+** 0
+                                        
+                                    
+** 1
+----------------------------------------                                                                                                                                                         
+** 2
+--------------------------------------------------------------------------------
+*** E
+phrases
+*
+** 0
+Phrase 0     
+** 0
+Phrase 1                                    
+*** E
+**** Scene
+//Lets add new features to make this easier!
+* 1
+** backDrop,0,0,0
+** backDrop,2,0,1
+** phrases,0,0,0
+*** E
+* 1
+** backDrop,0,0,0
+** backDrop,2,0,1
+** phrases,1,0,0
+*** E
+* M
+** 0,0,0,0
+*** E

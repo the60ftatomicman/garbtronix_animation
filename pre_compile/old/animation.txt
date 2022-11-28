@@ -1,0 +1,102 @@
+0,5
+*
+/-----\ Kiss
+| 0 0 |  |
+|  -  |oooooooooo
+\_____/ oooooooooo
+**
+1,5
+*
+/-----\ Kiss-a
+| 0 0 |      |
+|  -  |oooooooooo
+\_____/ oooooooooo
+**
+2,5
+*
+/-----\ Kiss-a-tae
+| - - |         |
+|  -  |oooooooooo
+\_____/ oooooooooo
+**
+3,5
+*
+/-----\ Kiss
+| - - |  |
+|  -  |oooooooooo
+\_____/ oooooooooo
+**
+4,5
+*
+/-----\ Kiss-a
+| 0 0 |      |
+|  -  |oooooooooo
+\_____/ oooooooooo
+**
+5,5
+*
+/-----\ Kiss-a-tae
+| 0 0 |         |
+|  -  |oooooooooo
+\_____/ oooooooooo
+**
+GOTO,0
+*
+6,2
+*
+-- -- -
+ -- - --
+- -- -
+**
+7,2
+*
+- -- --
+-- - --
+ -- -- 
+**
+8,5
+*
+/-\-/-\ Kiss
+| o o |  |
+|     |oooooooooo
+\__^__/ oooooooooo
+**
+9,5
+*
+/-\-/-\ Kiss-a
+| o o |      |
+|     |oooooooooo
+\__^__/ oooooooooo
+**
+10,5
+*
+/-\-/-\ Kiss-a-tae
+| o o |         |
+|     |oooooooooo
+\__^__/ oooooooooo
+**
+GOTO,8
+*
+11,5
+*
+/-\-/-\ Kiss
+| o o |  |
+|     |oooooooooo
+\__3__/ oooooooooo
+**
+12,5
+*
+/-\-/-\ Kiss-a
+| o o |      |
+|     |oooooooooo
+\__3__/ oooooooooo
+**
+13,5
+*
+/-\-/-\ Kiss-a-tae
+| o o |         |
+|     |oooooooooo
+\__^__/ oooooooooo
+**
+GOTO,11
+*

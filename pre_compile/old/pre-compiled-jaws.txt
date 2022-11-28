@@ -1,0 +1,286 @@
+**** Objects
+oceanBack
+*
+** 0
+                                                                 
+                                                                 
+                                                                 
+                                                                 
+                                                                 
+                                                                 
+                                                                 
+                                                                 
+                                                                 
+                                                                 
+                                                                 
+                                                                 
+                                                                 
+                                                                 
+                                                                 
+** 1
+-----------------------------------------------------------------
+*** E
+brodyHead
+*
+** 0
+  /
+ ||___________  //////
+ /   <O\_/  O> \/ //  /
+|      /|\      |   6 |
+ \____/ | \____/     |
+  |     |           |
+  |    - - \       /
+** 1
+\             /
+** 2
+\          /
+** 3
+\_______/
+** 4
+  /////////////////             
+ ||__///////////////
+  |\ ////    ///////
+  ||  /// 6  ///////  
+ /|/        ///////
+ ||         ///   \
+  |          |      \
+   \         |       \
+    \       /
+     \____/
+*** E
+brodyMouth
+*
+** 0
+<----->
+** 1
+<-----|
+  \---|
+*** E
+brodyCigerette
+*
+** 0
+//
+** 1
+#
+*** E
+brodyBody
+*
+** 0
+                           \
+     _____                 /__
+    / \                   /
+   /   \____             /
+  /    /         _______/
+ /    /          o
+** 1
+                           \
+     _____                 /__
+----- \                   /
+       \____             /
+-------          _______/
+                 o
+** 2
+                           \
+                           /__
+                          /
+                         /
+                 _______/
+                 o
+*** E
+jaws
+*
+** 0
+ ~~ ~~~~~~ ~~ ~~
+~~ ~ ~~ ~~  ~~   ~ ~
+** 1
+~~~   ~~~~~~   ~~ ~~
+  ~~~ ~ ~~ ~~~~   ~ ~
+** 2
+             ______--
+        ___--         \
+-------/    ----------/~
+~~~~~            ~~ ~~
+  ~~~   ~ ~~~~~~   ~ ~
+** 3
+             ______--
+        ___--         \
+-------/    ----------/
+      (O  / vvvvvvvvv
+         /@@@@@@@@||
+         \-^^^^^^^^^^/\
+                      | ~
+~~~~~            ~~ ~~
+  ~~~   ~ ~~~~~~   ~ ~
+*** E
+**** Scene
+//Shovelling chum
+* 5
+** oceanBack,0,0,1
+** oceanBack,1,0,13
+** brodyBody,0,0,7
+** brodyHead,0,6,1
+** brodyHead,1,9,8
+** brodyHead,2,10,9
+** brodyHead,3,11,10
+** brodyMouth,0,12,8
+** brodyCigerette,0,16,9
+** brodyCigerette,0,15,10
+** brodyCigerette,0,14,11
+** brodyCigerette,1,13,12
+*** E
+* 5
+** oceanBack,0,0,1
+** oceanBack,1,0,13
+** brodyBody,0,0,7
+** brodyHead,0,6,1
+** brodyHead,1,9,8
+** brodyHead,2,10,9
+** brodyHead,3,11,10
+** brodyMouth,1,12,8
+** brodyCigerette,0,16,9
+** brodyCigerette,0,15,10
+** brodyCigerette,0,14,11
+** brodyCigerette,1,13,12
+*** E
+* 5
+** oceanBack,0,0,1
+** oceanBack,1,0,13
+** brodyBody,1,0,7
+** brodyHead,0,6,1
+** brodyHead,1,9,8
+** brodyHead,2,10,9
+** brodyHead,3,11,10
+** brodyMouth,0,12,8
+** brodyCigerette,0,16,9
+** brodyCigerette,0,15,10
+** brodyCigerette,0,14,11
+** brodyCigerette,1,13,12
+*** E
+* 5
+** oceanBack,0,0,1
+** oceanBack,1,0,13
+** brodyBody,0,0,7
+** brodyHead,0,6,1
+** brodyHead,1,9,8
+** brodyHead,2,10,9
+** brodyHead,3,11,10
+** brodyMouth,1,12,8
+** brodyCigerette,0,16,9
+** brodyCigerette,0,15,10
+** brodyCigerette,0,14,11
+** brodyCigerette,1,13,12
+*** E
+* 5
+** oceanBack,0,0,1
+** oceanBack,1,0,13
+** brodyBody,1,0,7
+** brodyHead,0,6,1
+** brodyHead,1,9,8
+** brodyHead,2,10,9
+** brodyHead,3,11,10
+** brodyMouth,0,12,8
+** brodyCigerette,0,16,9
+** brodyCigerette,0,15,10
+** brodyCigerette,0,14,11
+** brodyCigerette,1,13,12
+*** E
+* 5
+** oceanBack,0,0,1
+** oceanBack,1,0,13
+** brodyBody,0,0,7
+** brodyHead,0,6,1
+** brodyHead,1,9,8
+** brodyHead,2,10,9
+** brodyHead,3,11,10
+** brodyMouth,1,12,8
+** brodyCigerette,0,16,9
+** brodyCigerette,0,15,10
+** brodyCigerette,0,14,11
+** brodyCigerette,1,13,12
+*** E
+* 30
+** oceanBack,0,0,1
+** oceanBack,1,0,13
+** brodyBody,1,0,7
+** brodyHead,4,6,1
+** brodyCigerette,0,8,9
+** brodyCigerette,0,8,10
+** brodyCigerette,0,7,11
+** brodyCigerette,1,7,12
+*** E
+* 5
+** oceanBack,0,0,1
+** jaws,0,0,9
+** brodyBody,2,26,7
+** brodyHead,4,32,1
+** brodyCigerette,0,34,9
+** brodyCigerette,0,34,10
+** brodyCigerette,0,33,11
+** brodyCigerette,1,33,12
+*** E
+* 5
+** oceanBack,0,0,1
+** oceanBack,1,0,13
+** jaws,1,0,9
+** brodyBody,2,26,7
+** brodyHead,4,32,1
+** brodyCigerette,0,34,9
+** brodyCigerette,0,34,10
+** brodyCigerette,0,33,11
+** brodyCigerette,1,33,12
+*** E
+* 5
+** oceanBack,0,0,1
+** oceanBack,1,0,13
+** jaws,0,0,9
+** brodyBody,2,26,7
+** brodyHead,4,32,1
+** brodyCigerette,0,34,9
+** brodyCigerette,0,34,10
+** brodyCigerette,0,33,11
+** brodyCigerette,1,33,12
+*** E
+* 5
+** oceanBack,0,0,1
+** oceanBack,1,0,13
+** jaws,1,0,9
+** brodyBody,2,26,7
+** brodyHead,4,32,1
+** brodyCigerette,0,34,9
+** brodyCigerette,0,34,10
+** brodyCigerette,0,33,11
+** brodyCigerette,1,33,12
+*** E
+* 5
+** oceanBack,0,0,1
+** oceanBack,1,0,13
+** jaws,2,0,6
+** brodyBody,2,26,7
+** brodyHead,4,32,1
+** brodyCigerette,0,34,9
+** brodyCigerette,0,34,10
+** brodyCigerette,0,33,11
+** brodyCigerette,1,33,12
+*** E
+* 5
+** oceanBack,0,0,1
+** oceanBack,1,0,13
+** jaws,3,0,3
+** brodyBody,2,26,7
+** brodyHead,4,32,1
+** brodyCigerette,0,34,9
+** brodyCigerette,0,34,10
+** brodyCigerette,0,33,11
+** brodyCigerette,1,33,12
+*** E
+* 5
+** oceanBack,0,0,1
+** oceanBack,1,0,13
+** jaws,0,0,9
+** brodyBody,2,26,7
+** brodyHead,4,32,1
+** brodyCigerette,0,34,9
+** brodyCigerette,0,34,10
+** brodyCigerette,0,33,11
+** brodyCigerette,1,33,12
+*** E

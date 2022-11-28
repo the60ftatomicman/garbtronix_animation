@@ -1,0 +1,655 @@
+**** Objects
+backDrop
+*
+** 0
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+** 1
+----------------------------------------
+** 2
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+** 3
+--------------------------------------------------------------------------------
+*** E
+phrases
+*
+** 0
+                                        
+** 1
+Zed: The Renegade is a menace.
+** 2
+Beck: I dunno, I think he's ok.
+** 3
+Mara: Yeah, lay off. he's a hero.
+** 4
+Tron: ...or they're an amateur who has their priorities tangled.
+** 5
+Tron: and not focusing on the revolution as they should be.
+** 6
+Tron: My name is Ron. can you fix my lightcycle?
+*** E
+mouths
+*
+** 0
+-
+** 1
+_
+** 2
+o
+** 3
+O
+** 4
+D
+** 5
+^
+*** E
+zed
+*
+** 0
+/|||||\
+|     D
+| v   |
+|    /
+ \__/|
+** 1
+/-----|  |----\
+** 2
+e e
+** 3
+/|||||\
+ᗡ     |
+|   v |
+ \    |
+ |\__/
+** 4
+ɘ ɘ
+** 5
+- -
+*** E
+beck
+*
+** 0
+  ___
+ /   ////
+|_/     |
+ C      |
+  \    |
+  |\__/
+** 1
+/----|   |---\
+** 2
+O O
+** 3
+__ _
+** 4
+ / \
+*** E
+mara
+*
+** 0
+   ____
+ //\   \
+\/   \  \
+ |   ↄ\ \/
+  \___/
+** 1
+/--| |--\
+** 2
+d
+** 3
+b
+*** E
+tron
+*
+** 0
+ ____
+|\V//|
+|    |
+|    |)
+| V  |
+|    | 
+ \__/
+** 1
+/----     ----\
+** 2
+_ _
+** 3
+/o o\
+*** E
+**** Scene
+//The Renegade is a menace
+//The
+* 1
+** backDrop,0,0,0
+** backDrop,1,0,10
+** phrases,1,0,11
+** zed,0,25,4
+** zed,2,26,5
+** zed,1,21,9
+** mouths,1,27,7
+** beck,0,3,3
+** beck,2,8,6
+** beck,3,7,5
+** beck,1,0,9
+** mouths,1,8,7
+*** E
+* 1
+** backDrop,0,0,0
+** backDrop,1,0,10
+** phrases,1,0,11
+** zed,0,25,4
+** zed,2,26,5
+** zed,1,21,9
+** mouths,2,27,7
+** beck,0,3,3
+** beck,2,8,6
+** beck,3,7,5
+** beck,1,0,9
+** mouths,1,8,7
+*** E
+//Renegade is a menace
+* R 0,1 L 6
+*** E
+// add a pause
+* 3
+** backDrop,0,0,0
+** backDrop,1,0,10
+** phrases,0,0,11
+** zed,0,25,4
+** zed,2,26,5
+** zed,1,21,9
+** mouths,1,27,7
+** beck,0,3,3
+** beck,2,8,6
+** beck,3,7,5
+** beck,1,0,9
+** mouths,1,8,7
+*** E
+* 1
+** backDrop,0,0,0
+** backDrop,1,0,10
+** phrases,0,0,11
+** zed,0,25,4
+** zed,2,26,5
+** zed,1,21,9
+** mouths,1,27,7
+** beck,0,3,3
+** beck,2,8,6
+** beck,4,7,5
+** beck,1,0,9
+** mouths,1,8,7
+*** E
+// I dunno I think he's ok.
+// I
+* 1
+** backDrop,0,0,0
+** backDrop,1,0,10
+** phrases,2,0,11
+** zed,0,25,4
+** zed,2,26,5
+** zed,1,21,9
+** mouths,1,27,7
+** beck,0,3,3
+** beck,2,8,6
+** beck,4,7,5
+** beck,1,0,9
+** mouths,1,8,7
+*** E
+* 1
+** backDrop,0,0,0
+** backDrop,1,0,10
+** phrases,2,0,11
+** zed,0,25,4
+** zed,2,26,5
+** zed,1,21,9
+** mouths,1,27,7
+** beck,0,3,3
+** beck,2,8,6
+** beck,4,7,5
+** beck,1,0,9
+** mouths,2,8,7
+*** E
+// dunno I think he's ok
+* R 16,17 L 6
+*** E
+// Begin shift for mara to come in
+* 1
+** backDrop,2,-40,0
+** backDrop,3,-40,10
+//** phrases,1,0,11
+** zed,0,25,4
+** zed,2,26,5
+** zed,1,21,9
+** mouths,1,27,7
+** beck,0,3,3
+** beck,2,8,6
+** beck,3,7,5
+** beck,1,0,9
+** mouths,1,8,7
+** mara,0,-10,4
+** mara,3,-7,6
+** mara,1,-10,9
+** mouths,0,-6,8
+*** E
+* SXP12
+*** E
+//Mara: Yeah, lay off. he's a hero.
+* 1
+** backDrop,2,-28,0
+** backDrop,3,-28,10
+** phrases,3,0,11
+** zed,0,37,4
+** zed,2,38,5
+** zed,1,33,9
+** mouths,1,39,7
+** beck,0,15,3
+** beck,2,20,6
+** beck,3,19,5
+** beck,1,12,9
+** mouths,1,20,7
+** mara,0,2,4
+** mara,2,5,6
+** mara,1,2,9
+** mouths,0,6,8
+*** E
+* 1
+** backDrop,2,-28,0
+** backDrop,3,-28,10
+** phrases,3,0,11
+** zed,0,37,4
+** zed,2,38,5
+** zed,1,33,9
+** mouths,1,39,7
+** beck,0,15,3
+** beck,2,20,6
+** beck,3,19,5
+** beck,1,12,9
+** mouths,1,20,7
+** mara,0,2,4
+** mara,2,5,6
+** mara,1,2,9
+** mouths,2,6,8
+*** E
+* R 43,44 L 7
+*** E
+* M4
+** 0XP1
+** 1XP1
+*** E
+Tron enters, blinking
+* 3
+** backDrop,2,-16,0
+** backDrop,3,-16,10
+** phrases,0,0,11
+** zed,0,37,4
+** zed,2,38,5
+** zed,1,33,9
+** mouths,1,39,7
+** beck,0,15,3
+** beck,2,20,6
+** beck,3,19,5
+** beck,1,12,9
+** mouths,1,20,7
+** mara,0,2,4
+** mara,3,5,6
+** mara,1,2,9
+** mouths,0,6,8
+** tron,1,48,9
+** tron,0,52,3
+** tron,2,53,5
+** mouths,1,54,8
+*** E
+//Tron: ...or they're an amateur who has their priorities tangled.
+* 1
+** backDrop,2,-16,0
+** backDrop,3,-16,10
+** phrases,4,0,11
+** zed,0,37,4
+** zed,2,38,5
+** zed,1,33,9
+** mouths,1,39,7
+** beck,0,15,3
+** beck,2,20,6
+** beck,3,19,5
+** beck,1,12,9
+** mouths,1,20,7
+** mara,0,2,4
+** mara,3,5,6
+** mara,1,2,9
+** mouths,0,6,8
+** tron,1,48,9
+** tron,0,52,3
+** tron,2,53,5
+** mouths,1,54,8
+*** E
+* 1
+** backDrop,2,-16,0
+** backDrop,3,-16,10
+** phrases,4,0,11
+** zed,0,37,4
+** zed,2,38,5
+** zed,1,33,9
+** mouths,1,39,7
+** beck,0,15,3
+** beck,2,20,6
+** beck,3,19,5
+** beck,1,12,9
+** mouths,1,20,7
+** mara,0,2,4
+** mara,3,5,6
+** mara,1,2,9
+** mouths,0,6,8
+** tron,1,48,9
+** tron,0,52,3
+** tron,2,53,5
+** mouths,2,54,8
+*** E
+* R 64,67 L 7
+*** E
+//Tron: and not focusing on the revolution as they should be.
+* 1
+** backDrop,2,-16,0
+** backDrop,3,-16,10
+** phrases,5,0,11
+** zed,0,37,4
+** zed,2,38,5
+** zed,1,33,9
+** mouths,1,39,7
+** beck,0,15,3
+** beck,2,20,6
+** beck,4,19,5
+** beck,1,12,9
+** mouths,1,20,7
+** mara,0,2,4
+** mara,3,5,6
+** mara,1,2,9
+** mouths,0,6,8
+** tron,1,48,9
+** tron,0,52,3
+** tron,2,53,5
+** mouths,1,54,8
+*** E
+* 1
+** backDrop,2,-16,0
+** backDrop,3,-16,10
+** phrases,5,0,11
+** zed,0,37,4
+** zed,2,38,5
+** zed,1,33,9
+** mouths,1,39,7
+** beck,0,15,3
+** beck,2,20,6
+** beck,4,19,5
+** beck,1,12,9
+** mouths,1,20,7
+** mara,0,2,4
+** mara,3,5,6
+** mara,1,2,9
+** mouths,0,6,8
+** tron,1,48,9
+** tron,0,52,3
+** tron,2,53,5
+** mouths,2,54,8
+*** E
+* R 94,95 L 7
+*** E
+//Scilence and stuff. Zed backs up from Tron
+* 4
+** backDrop,2,-16,0
+** backDrop,3,-16,10
+** phrases,0,0,11
+** zed,3,38,4
+** zed,4,41,5
+** zed,1,33,9
+** mouths,1,42,7
+** beck,0,15,3
+** beck,2,20,6
+** beck,4,19,5
+** beck,1,12,9
+** mouths,5,20,7
+** mara,0,2,4
+** mara,3,5,6
+** mara,1,2,9
+** mouths,0,6,8
+** tron,1,48,9
+** tron,0,52,3
+** tron,2,53,5
+** mouths,1,54,8
+*** E
+* 1
+** backDrop,2,-16,0
+** backDrop,3,-16,10
+** phrases,0,0,11
+** zed,3,37,4
+** zed,4,40,5
+** zed,1,32,9
+** mouths,1,41,7
+** beck,0,15,3
+** beck,2,20,6
+** beck,4,19,5
+** beck,1,12,9
+** mouths,5,20,7
+** mara,0,2,4
+** mara,3,5,6
+** mara,1,2,9
+** mouths,0,6,8
+** tron,1,48,9
+** tron,0,52,3
+** tron,2,53,5
+** mouths,1,54,8
+*** E
+* 2
+** backDrop,2,-16,0
+** backDrop,3,-16,10
+** phrases,0,0,11
+** zed,3,37,4
+** zed,4,40,5
+** zed,1,32,9
+** mouths,1,41,7
+** beck,0,15,3
+** beck,2,20,6
+** beck,4,19,5
+** beck,1,12,9
+** mouths,5,20,7
+** mara,0,2,4
+** mara,3,5,6
+** mara,1,2,9
+** mouths,0,6,8
+** tron,1,48,9
+** tron,0,52,3
+** tron,2,53,5
+** mouths,1,54,8
+*** E
+* 1
+** backDrop,2,-16,0
+** backDrop,3,-16,10
+** phrases,0,0,11
+** zed,3,36,4
+** zed,4,39,5
+** zed,1,31,9
+** mouths,1,40,7
+** beck,0,15,3
+** beck,2,20,6
+** beck,4,19,5
+** beck,1,12,9
+** mouths,5,20,7
+** mara,0,2,4
+** mara,3,5,6
+** mara,1,2,9
+** mouths,0,6,8
+** tron,1,48,9
+** tron,0,52,3
+** tron,2,53,5
+** mouths,1,54,8
+*** E
+* 3
+** backDrop,2,-16,0
+** backDrop,3,-16,10
+** phrases,0,0,11
+** zed,3,36,4
+** zed,4,39,5
+** zed,1,31,9
+** mouths,1,40,7
+** beck,0,15,3
+** beck,2,20,6
+** beck,4,19,5
+** beck,1,12,9
+** mouths,5,20,7
+** mara,0,2,4
+** mara,3,5,6
+** mara,1,2,9
+** mouths,0,6,8
+** tron,1,48,9
+** tron,0,52,3
+** tron,2,53,5
+** mouths,1,54,8
+*** E
+//blink here
+* 1
+** backDrop,2,-16,0
+** backDrop,3,-16,10
+** phrases,0,0,11
+** zed,3,36,4
+** zed,5,39,5
+** zed,1,31,9
+** mouths,1,40,7
+** beck,0,15,3
+** beck,2,20,6
+** beck,4,19,5
+** beck,1,12,9
+** mouths,5,20,7
+** mara,0,2,4
+** mara,3,5,6
+** mara,1,2,9
+** mouths,0,6,8
+** tron,1,48,9
+** tron,0,52,3
+** tron,2,53,5
+** mouths,1,54,8
+*** E
+* 1
+** backDrop,2,-16,0
+** backDrop,3,-16,10
+** phrases,0,0,11
+** zed,3,33,4
+** zed,4,35,5
+** zed,1,28,9
+** mouths,1,36,7
+** beck,0,15,3
+** beck,2,20,6
+** beck,4,19,5
+** beck,1,12,9
+** mouths,5,20,7
+** mara,0,2,4
+** mara,3,5,6
+** mara,1,2,9
+** mouths,0,6,8
+** tron,1,48,9
+** tron,0,52,3
+** tron,2,53,5
+** mouths,1,54,8
+*** E
+* 1
+** backDrop,2,-16,0
+** backDrop,3,-16,10
+** phrases,0,0,11
+** zed,3,33,4
+** zed,4,36,5
+** zed,1,28,9
+** mouths,1,36,7
+** beck,0,15,3
+** beck,2,20,6
+** beck,4,19,5
+** beck,1,12,9
+** mouths,5,20,7
+** mara,0,2,4
+** mara,3,5,6
+** mara,1,2,9
+** mouths,0,6,8
+** tron,1,48,9
+** tron,0,52,3
+** tron,2,53,5
+** mouths,1,54,8
+*** E
+* M3
+** 3XN1
+** 4XN1
+** 5XN1
+** 6XN1
+*** E
+* M1
+** 3XN1
+** 4XN1
+** 5XN1
+** 6XN1
+*** E
+//Tron: My name is Ron. can you fix my lightcycle?
+* 1
+** backDrop,2,-16,0
+** backDrop,3,-16,10
+** phrases,6,0,11
+** zed,3,26,4
+** zed,4,29,5
+** zed,1,21,9
+** mouths,1,29,7
+** beck,0,15,3
+** beck,2,20,6
+** beck,3,19,5
+** beck,1,12,9
+** mouths,5,20,7
+** mara,0,2,4
+** mara,2,5,6
+** mara,1,2,9
+** mouths,0,6,8
+** tron,1,48,9
+** tron,0,52,3
+** tron,3,52,5
+** mouths,1,54,8
+*** E
+* 1
+** backDrop,2,-16,0
+** backDrop,3,-16,10
+** phrases,6,0,11
+** zed,3,26,4
+** zed,4,29,5
+** zed,1,21,9
+** mouths,1,29,7
+** beck,0,15,3
+** beck,2,20,6
+** beck,3,19,5
+** beck,1,12,9
+** mouths,5,20,7
+** mara,0,2,4
+** mara,2,5,6
+** mara,1,2,9
+** mouths,0,6,8
+** tron,1,48,9
+** tron,0,52,3
+** tron,3,52,5
+** mouths,4,54,8
+*** E
+* R 122,123 L 10
+*** E

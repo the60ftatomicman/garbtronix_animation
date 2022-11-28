@@ -1,0 +1,95 @@
+**** Objects
+Hair
+*
+** 0
+ _____
+/ \\\\\
+*** E
+Eyes
+*
+** 0
+| O  O |
+| ~~~~ |
+** 1
+| -  - |
+| ~~~~ |
+*** E
+Beard
+*
+** 0
+~~ -- ~~
+~~~~~~~~
+ ~~~~~~
+  ~~~~
+   ~~
+** 1
+~~  0 ~~
+~~~~~~~~
+ ~~~~~~
+  ~~~~
+   ~~
+*** E
+Speech
+*
+** 0
+  Yer
+ / 
+/
+** 1
+  Yer a
+ / 
+/
+** 2
+  Yer a Wi
+ / 
+/
+** 3
+  Yer a Wi-zard
+ / 
+/
+** 4
+  Yer a Wi-zard 'arry
+ / 
+/
+** 5
+  Yer a Wi-zard 'arry 'otter
+ / 
+/
+*** E
+**** Scene
+* 5
+** Hair,0,0,0
+** Eyes,0,0,2
+** Beard,0,0,4
+** Speech,0,9,1
+*** E
+* 5
+** Hair,0,0,0
+** Eyes,0,0,2
+** Beard,0,0,4
+** Speech,1,9,1
+*** E
+* 5
+** Hair,0,0,0
+** Eyes,1,0,2
+** Beard,0,0,4
+** Speech,2,9,1
+*** E
+* 5
+** Hair,0,0,0
+** Eyes,0,0,2
+** Beard,0,0,4
+** Speech,3,9,1
+*** E
+* 5
+** Hair,0,0,0
+** Eyes,0,0,2
+** Beard,0,0,4
+** Speech,4,9,1
+*** E
+* 5
+** Hair,0,0,0
+** Eyes,0,0,2
+** Beard,0,0,4
+** Speech,5,9,1
+*** E
