@@ -1,4 +1,5 @@
 # Garbtronix Animation Library
+
 My Personal ASCII animation tool
 Able to build GIFS and MP4's straight from text.
 
@@ -7,6 +8,7 @@ Able to build GIFS and MP4's straight from text.
 <sup>Built from this very suite.</sup>
 
 ### Setup ###
+
 - Install Python 3 latest
 - Pip Install Dependancies
     - ```pip install Pillow```
@@ -24,7 +26,9 @@ Able to build GIFS and MP4's straight from text.
 ![The chair will not be present](./Docs/Imgs/MainWindow.png)
 
 ### How It Works ###
+
 The application has 2 main important file standards with their own special markup language which get read.
+
 - <b>PRE-COMPILED</b>
     - a program/markup language file which allows for object definition and scene composition.
     - This only produces output for the OTHER markup language.
@@ -32,6 +36,7 @@ The application has 2 main important file standards with their own special marku
     - A simple file which displays every frame that will be generated into an image
 
 The standard workflow is as follows:
+
     - (Optional) Build a pre-compiled file and compile it
         - Good for complex scenes and stories
     - Generate a post-compile file
@@ -43,6 +48,7 @@ The standard workflow is as follows:
 TL;DR -> Pre,Post,Build.
 
 #### Post Compiled File Standard ####
+
 The format for these files is DEAD. SIMPLE. Let's take a look at a 2 frame animation:
 ```
 0,1
