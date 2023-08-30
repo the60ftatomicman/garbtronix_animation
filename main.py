@@ -166,7 +166,7 @@ def parsePreCompileFile():
     blnSceneSection=False
     blnSceneStandardCommands=False
     blnSceneRepeatCommands=False
-    
+    blnSceneModifiedCommands=False
     strCurrentObject=""
     regexObjectSection=compile('^(\*\*\*\*) Objects$')
     regexObjectName=compile('^[a-zA-Z0-9]{1,}')
@@ -177,11 +177,16 @@ def parsePreCompileFile():
     regexSceneSection=compile('^(\*\*\*\*) Scene$')
     regexSceneStandardStart=compile('^(\*) [0-9]$')
     regexSceneRepeatStart=compile('^(\*) R [0-9]')
-    regexSceneObject=compile('^(\*\*) [a-zA-Z]')
+    regexSceneModifiedStart=compile('^(\*) M [0-9]')
+    regexSceneModifiedCommand=compile('^(\*\*) [0-9,]{1,}')
+    regexSceneObject=compile('^(\*\*) [a-zA-Z]{1,}')
     regexSceneEnd=compile('^(\*\*\*) E$')
     
     lstObjects={}
     lstScenes={}
+    lstLastSceneCommands=[]
+    lstModifiedCommands=[]
+    
     if (blnScanningDir == False and blnSavingGif == False and blnRunLoop.get() != 1):
         with open(strPreFile, mode='r',encoding='utf-8') as fileData:
             lines = fileData.readlines()  # list containing lines of file
@@ -213,43 +218,98 @@ def parsePreCompileFile():
                                 blnSceneStandardCommands=False
                                 lstScenes[latestIdx].append(list("**"))
                             if(regexSceneObject.match(line)):
+                                lstLastSceneCommands.append(line)
                                 cmdData = line.replace("** ","").split(',')
                                 if cmdData[0] in lstObjects:
                                     if(int(cmdData[1]) in lstObjects[cmdData[0]]):
                                         cy=0
                                         for lne in lstObjects[cmdData[0]][int(cmdData[1])]:
                                             lneData=list(lne)
-                                            cx=0
-                                            for chr in lneData:
-                                                x=int(cmdData[2])+cx
-                                                y=int(cmdData[3])+cy+2# the 2 is our prefece for header info
-                                                # Pad Y values
-                                                if y not in lstScenes[latestIdx]:
-                                                    while(len(lstScenes[latestIdx]) < y+1):
-                                                        lstScenes[latestIdx].append([])
-                                                # Pad X values
-                                                if x not in lstScenes[latestIdx][y]:
-                                                    while(len(lstScenes[latestIdx][y]) < x+1):
-                                                        lstScenes[latestIdx][y].append(' ')
-                                                lstScenes[latestIdx][y][x]=chr
-                                                cx=cx+1
+                                            y=int(cmdData[3])+cy
+                                            if  y >= 0:
+                                                y=y+2 # the 2 is our prefece for header info
+                                                cx=0
+                                                for chr in lneData:
+                                                    x=int(cmdData[2])+cx
+                                                    # Pad Y values
+                                                    if y >= 0 and y not in lstScenes[latestIdx]:
+                                                        while(len(lstScenes[latestIdx]) < y+1):
+                                                            lstScenes[latestIdx].append([])
+                                                    # Pad X values
+                                                    if x >= 0 and x not in lstScenes[latestIdx][y]:
+                                                        while(len(lstScenes[latestIdx][y]) < x+1):
+                                                            lstScenes[latestIdx][y].append(' ')
+                                                    if x >= 0:
+                                                        lstScenes[latestIdx][y][x]=chr
+                                                    cx=cx+1
                                             cy=cy+1
                                     else:
                                        print("Could not find Index: "+str(cmdData[1])+" in Object: "+cmdData[0]) 
                                 else:
                                     print("Could not find Object: "+cmdData[0])
-                        if(blnSceneRepeatCommands == True):
+                        elif(blnSceneRepeatCommands == True):
                             blnSceneRepeatCommands=False
+                        elif(blnSceneModifiedCommands == True):
+                            if(regexSceneEnd.match(line)):
+                                blnSceneModifiedCommands=False
+                                latestIdx=latestIdx+1
+                                lstScenes[latestIdx]=[]
+                                for cmd in lstLastSceneCommands:
+                                    cmdData = cmd.replace("** ","").split(',')
+                                    if cmdData[0] in lstObjects:
+                                        if(int(cmdData[1]) in lstObjects[cmdData[0]]):
+                                            cy=0
+                                            for lne in lstObjects[cmdData[0]][int(cmdData[1])]:
+                                                lneData=list(lne)
+                                                y=int(cmdData[3])+cy
+                                                if  y >= 0:
+                                                    y=y+2 # the 2 is our prefece for header info
+                                                    cx=0
+                                                    for chr in lneData:
+                                                        x=int(cmdData[2])+cx
+                                                        # Pad Y values
+                                                        if y >= 0 and y not in lstScenes[latestIdx]:
+                                                            while(len(lstScenes[latestIdx]) < y+1):
+                                                                lstScenes[latestIdx].append([])
+                                                        # Pad X values
+                                                        if x >= 0 and x not in lstScenes[latestIdx][y]:
+                                                            while(len(lstScenes[latestIdx][y]) < x+1):
+                                                                lstScenes[latestIdx][y].append(' ')
+                                                        if x >= 0:
+                                                            lstScenes[latestIdx][y][x]=chr
+                                                        cx=cx+1
+                                                cy=cy+1
+                                        else:
+                                            print("Could not find Index: "+str(cmdData[1])+" in Object: "+cmdData[0]) 
+                                    else:
+                                        print("Could not find Object: "+cmdData[0])
+                            if(regexSceneModifiedCommand.match(line)):
+                                cmdData = line.replace("** ","").replace('\n', '').replace('\r', '').split(",")
+                                lstModifiedCommands.append(cmdData)
+                                cmdIdx  = int(cmdData[0])
+                                drawIdx = cmdData[1]
+                                xDiff = 0
+                                if len(cmdData) > 2:
+                                    xDiff = int(cmdData[2])
+                                yDiff = 0
+                                if len(cmdData) > 3:
+                                    yDiff = int(cmdData[3])
+                                newCommand = lstLastSceneCommands[cmdIdx]
+                                newCommand = newCommand.replace('\n', '').replace('\r', '').split(",")
+                                newCommand[1]=drawIdx
+                                newCommand[2]=str(int(newCommand[2])+xDiff)
+                                newCommand[3]=str(int(newCommand[3])+yDiff)
+                                lstLastSceneCommands[cmdIdx] = ",".join(newCommand)+'\n'
                         else:
                             if(regexSceneStandardStart.match(line)):
                                 blnSceneStandardCommands=True
+                                lstLastSceneCommands=[]
                                 framecount=line.split()[1]
                                 lstScenes[latestIdx]=[]
                                 lstScenes[latestIdx].append(list(str(latestIdx)+","+framecount))
                                 lstScenes[latestIdx].append(list("*"))
                             if(regexSceneRepeatStart.match(line)):
-                                # TODO -- add in C modifier!
-                                #    * R 0,1 L 5
+                                # TODO -- add in C modifier again!
                                 repeatData = line.replace("* R ","")
                                 startEnd   = repeatData.split(" ")[0]
                                 loopData   = int(repeatData.split(" L ")[1])
@@ -266,6 +326,9 @@ def parsePreCompileFile():
                                         current+=1
                                     loops+=1
                                 blnSceneRepeatCommands=True
+                            if(regexSceneModifiedStart.match(line)):
+                                blnSceneModifiedCommands=True
+                                lstModifiedCommands=[]
                     # -- Section Determination Booleans
                     if(regexObjectSection.match(line)):
                         blnObjectSection = True
