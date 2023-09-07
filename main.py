@@ -21,7 +21,7 @@ from numpy import array as numpy_array
 # TODO: As part of the programmatic pre-compiled scripts it'd be REALLY nice to give a "translucent" character
 #       to ease headaches in building programmatic code
 # TODO: Investigate adding sound?
-# TODO: Add leftmost column TRIM and bottom trim.
+# TODO: This ux is ugly as hell
 
 # Have to put this here because of blnRunLoop
 window = tk.Tk()
@@ -55,57 +55,78 @@ renderFont = ImageFont.truetype(dirRoot+"/fonts/lucon.ttf",encoding='unic',size=
 
 # ----- Header
 frmControls  = tk.Frame(window)
-frmTextboxes = tk.Frame(frmControls)
-frmButtons   = tk.Frame(frmControls)
+frmSizing    = tk.Frame(frmControls)
+frmPlayback  = tk.Frame(frmControls)
+frmWriters   = tk.Frame(frmControls)
+
 # - Run Loop Checkbox
-chkRunLoop = tk.Checkbutton(frmControls, text='Run Loop',variable=blnRunLoop, onvalue=1, offvalue=0)
-chkRunLoop.grid(row=0, column=0)
+chkRunLoop = tk.Checkbutton(frmPlayback, text='Run Loop',variable=blnRunLoop, onvalue=1, offvalue=0)
+chkRunLoop.grid(row=0, column=6)
+
 # - Width Control
 tkWidth  = tk.StringVar()
-lblWidth = tk.Label(frmTextboxes,text="W:")
-lblWidth.grid(row=0, column=0)
-txtWidth = tk.Entry(frmTextboxes,width=5,textvariable=tkWidth)
-txtWidth.grid(row=0, column=1)
+lblWidth = tk.Label(frmSizing,text="W:")
+lblWidth.grid(row=0, column=1)
+txtWidth = tk.Entry(frmSizing,width=5,textvariable=tkWidth)
+txtWidth.grid(row=0, column=2)
 
 # - Height Control
 tkHeight  = tk.StringVar()
 tkHeight.set("")
-lblHeight = tk.Label(frmTextboxes,text="H:")
-lblHeight.grid(row=0, column=2)
-txtHeight = tk.Entry(frmTextboxes,width=5,textvariable=tkHeight)
-txtHeight.grid(row=0, column=3)
+lblHeight = tk.Label(frmSizing,text="H:")
+lblHeight.grid(row=0, column=3)
+txtHeight = tk.Entry(frmSizing,width=5,textvariable=tkHeight)
+txtHeight.grid(row=0, column=4)
+#tkHeight.trace("w", text_changed)
+
+# - Rightmost Column Control
+tkRight  = tk.StringVar()
+tkRight.set("")
+lblRight = tk.Label(frmSizing,text="Max Cols:")
+lblRight.grid(row=0, column=5)
+txtRight = tk.Entry(frmSizing,width=5,textvariable=tkRight)
+txtRight.grid(row=0, column=6)
+
+# - Botmost Row Control
+tkBot  = tk.StringVar()
+tkBot.set("")
+lblBot = tk.Label(frmSizing,text="Max Rows:")
+lblBot.grid(row=0, column=7)
+txtBot = tk.Entry(frmSizing,width=5,textvariable=tkBot)
+txtBot.grid(row=0, column=8)
 #tkHeight.trace("w", text_changed)
 
 # - FPS (Speed) Control
-lblFPS = tk.Label(frmTextboxes,text="FPS")
+lblFPS = tk.Label(frmPlayback,text="FPS")
 lblFPS.grid(row=0, column=4)
-txtFPS = tk.Spinbox(frmTextboxes,width=5,values=[24,18,15,12,6,1,0.5,0.25,0.1])
+txtFPS = tk.Spinbox(frmPlayback,width=5,values=[24,18,15,12,6,1,0.5,0.25,0.1])
 txtFPS.grid(row=0, column=5)
 
 # - Resize Button
-btnResize = tk.Button(frmButtons, text='Resize')
+btnResize = tk.Button(frmSizing, text='Resize')
 btnResize.grid(row=0, column=0,padx=2)
 # - Previous Button
-btnPrevious = tk.Button(frmButtons, text='Previous')
+btnPrevious = tk.Button(frmPlayback, text='Previous')
 btnPrevious.grid(row=0, column=1,padx=2)
 # - Next Button
-btnNext = tk.Button(frmButtons, text='Next')
+btnNext = tk.Button(frmPlayback, text='Next')
 btnNext.grid(row=0, column=2,padx=2)
 # - Save Button
-btnSave = tk.Button(frmButtons, text='Save')
+btnSave = tk.Button(frmWriters, text='Save')
 btnSave.grid(row=0, column=3,padx=2)
 # - Save Button
-btnCompile = tk.Button(frmButtons, text='Compile')
+btnCompile = tk.Button(frmWriters, text='Compile')
 btnCompile.grid(row=0, column=4,padx=2)
 
 # - Img
 picDrawing = tk.Label(frmControls, width=512, height=512)
-picDrawing.grid(row=0, column=1,columnspan=2)
+picDrawing.grid(row=0, column=0,columnspan=2,padx=10,pady=1)
 
 # -- build it all together
 frmControls.grid(row=0,column=0)
-frmTextboxes.grid(row=1,column=0)
-frmButtons.grid(row=2,column=0)
+frmSizing.grid(row=2,column=0)
+frmPlayback.grid(row=1,column=0)
+frmWriters.grid(row=3,column=0)
 
 # ---------- Methods
 
@@ -170,14 +191,24 @@ def getPreCompileFileLines():
 ### push data from objects to
 ### a new scene
 def addObjectToScene(scene,objects,line):
+    global tkBot,tkRight
     cmdData = line.replace("** ","").split(',')
+    
+    botColumn = -1
+    if tkBot.get() != "":
+        botColumn = int(tkBot.get())
+
+    rightColumn = -1
+    if tkRight.get() != "":
+        rightColumn = int(tkRight.get())
+
     if cmdData[0] in objects:
         if(int(cmdData[1]) in objects[cmdData[0]]):
             cy=0
             for lne in objects[cmdData[0]][int(cmdData[1])]:
                 lneData=list(lne)
                 y=int(cmdData[3])+cy
-                if  y >= 0:
+                if  y >= 0 and (botColumn == -1 or y <= botColumn):
                     y=y+2 # the 2 is our prefece for header info
                     cx=0
                     for chr in lneData:
@@ -187,10 +218,10 @@ def addObjectToScene(scene,objects,line):
                             while(len(scene) < y+1):
                                 scene.append([])
                         # Pad X values
-                        if x >= 0 and x not in scene[y]:
+                        if x >= 0 and x not in scene[y] and (rightColumn == -1 or x <= rightColumn):
                             while(len(scene[y]) < x+1):
                                 scene[y].append(' ')
-                        if x >= 0:
+                        if x >= 0 and (rightColumn == -1 or x <= rightColumn):
                             scene[y][x]=chr
                         cx=cx+1
                 cy=cy+1
@@ -203,143 +234,6 @@ def addObjectToScene(scene,objects,line):
 ### The file is parsed and our lstFrames array is populated with text.
 ### This will not run if we are scanning OR saving.
 def parsePreCompileFile():
-    global blnScanningDir,blnSavingGif,blnRunLoop
-    blnObjectSection=False
-    blnObjectIndex=False
-    blnSceneSection=False
-    blnSceneStandardCommands=False
-    blnSceneRepeatCommands=False
-    blnSceneModifiedCommands=False
-    intModifiedLoops=""
-    strCurrentObject=""
-    regexObjectSection=compile('^(\*\*\*\*) Objects$')
-    regexObjectName=compile('^[a-zA-Z0-9]{1,}')
-    regexObjectStart=compile('^(\*)$')
-    regexObjectIdx=compile('^(\*\*) [0-9]$')
-    regexObjectEnd=compile('^(\*\*\*) E$')
-    
-    regexSceneSection=compile('^(\*\*\*\*) Scene$')
-    regexSceneStandardStart=compile('^(\*) [0-9]$')
-    regexSceneRepeatStart=compile('^(\*) R [0-9]')
-    regexSceneModifiedStart=compile('^(\*) M [0-9]')
-    regexSceneModifiedCommand=compile('^(\*\*) [0-9,]{1,}')
-    regexSceneObject=compile('^(\*\*) [a-zA-Z]{1,}')
-    regexSceneEnd=compile('^(\*\*\*) E$')
-    
-    lstObjects={}
-    lstScenes={}
-    lstLastSceneCommands=[]
-    
-    if (blnScanningDir == False and blnSavingGif == False and blnRunLoop.get() != 1):
-        with open(strPreFile, mode='r',encoding='utf-8') as fileData:
-            lines = fileData.readlines()  # list containing lines of file
-            for line in lines:
-                if line:
-                    # Object Parsing
-                    if(blnObjectSection):
-                        if(blnObjectIndex):
-                            if(regexObjectEnd.match(line)):
-                                blnObjectIndex=False
-                            elif(regexObjectIdx.match(line)):
-                                latestIdx=len(lstObjects[strCurrentObject])
-                                lstObjects[strCurrentObject][latestIdx]=[]
-                            else:
-                                latestIdx=len(lstObjects[strCurrentObject])-1
-                                lstObjects[strCurrentObject][latestIdx].append(line.replace('\n', '').replace('\r', ''))
-                        else:
-                            if(regexObjectStart.match(line)):
-                                blnObjectIndex=True
-                            if(regexObjectName.match(line)):
-                                strCurrentObject=line.strip()
-                                lstObjects[strCurrentObject]={}
-                    # Scene Parsing
-                    if(blnSceneSection):
-                        latestIdx=len(lstScenes)
-                        if latestIdx in lstScenes:
-                            latestIdx=latestIdx+1 # This is for after repeats
-                        if(blnSceneStandardCommands == True):
-                            latestIdx=latestIdx-1
-                            if(regexSceneEnd.match(line)):
-                                blnSceneStandardCommands=False
-                                lstScenes[latestIdx].append(list("**"))
-                            if(regexSceneObject.match(line)):
-                                lstLastSceneCommands.append(line)
-                                addObjectToScene(lstScenes[latestIdx],lstObjects,line)
-                        elif(blnSceneRepeatCommands == True):
-                            blnSceneRepeatCommands=False
-                        elif(blnSceneModifiedCommands == True):
-                            if(regexSceneEnd.match(line)):
-                                blnSceneModifiedCommands=False
-                                lstScenes[latestIdx]=[]
-                                lstScenes[latestIdx].append(list(str(latestIdx)+","+lstScenes[latestIdx-1][0][len(lstScenes[latestIdx-1][0])-1]))
-                                lstScenes[latestIdx].append(list("*"))
-                                for cmd in lstLastSceneCommands:
-                                    addObjectToScene(lstScenes[latestIdx],lstObjects,cmd)
-                                lstScenes[latestIdx].append(list("**"))
-                            if(regexSceneModifiedCommand.match(line)):
-                                cmdData = line.replace("** ","").replace('\n', '').replace('\r', '').split(",")
-                                cmdIdx  = int(cmdData[0])
-                                drawIdx = cmdData[1]
-                                xDiff = 0
-                                if len(cmdData) > 2:
-                                    xDiff = int(cmdData[2])
-                                yDiff = 0
-                                if len(cmdData) > 3:
-                                    yDiff = int(cmdData[3])
-                                newCommand = lstLastSceneCommands[cmdIdx]
-                                newCommand = newCommand.replace('\n', '').replace('\r', '').split(",")
-                                newCommand[1]=drawIdx
-                                newCommand[2]=str(int(newCommand[2])+xDiff)
-                                newCommand[3]=str(int(newCommand[3])+yDiff)
-                                lstLastSceneCommands[cmdIdx] = ",".join(newCommand)+'\n'
-                        else:
-                            if(regexSceneStandardStart.match(line)):
-                                blnSceneStandardCommands=True
-                                lstLastSceneCommands=[]
-                                framecount=line.split()[1]
-                                lstScenes[latestIdx]=[]
-                                lstScenes[latestIdx].append(list(str(latestIdx)+","+framecount))
-                                lstScenes[latestIdx].append(list("*"))
-                            if(regexSceneRepeatStart.match(line)):
-                                # TODO -- add in C modifier again!
-                                repeatData = line.replace("* R ","")
-                                startEnd   = repeatData.split(" ")[0]
-                                loopData   = int(repeatData.split(" L ")[1])
-                                loops = 0
-                                while loops < loopData:
-                                    start=int(startEnd.split(',')[0])
-                                    end=int(startEnd.split(',')[1])
-                                    current=0
-                                    while (start+current)<=end:
-                                        copyScene=copy.deepcopy(lstScenes[start+current])
-                                        latestIdx=len(lstScenes)+1
-                                        lstScenes[latestIdx]=copyScene
-                                        newFrameIdx = "".join(lstScenes[latestIdx][0]).split(',')
-                                        newFrameIdx[0]=str(latestIdx)
-                                        lstScenes[latestIdx][0]= list(newFrameIdx[0]+','+newFrameIdx[1])
-                                        current+=1
-                                    loops+=1
-                                blnSceneRepeatCommands=True
-                            if(regexSceneModifiedStart.match(line)):
-                                blnSceneModifiedCommands=True
-                    # -- Section Determination Booleans
-                    if(regexObjectSection.match(line)):
-                        blnObjectSection = True
-                        blnSceneSection  = False
-                    if(regexSceneSection.match(line)):
-                        blnObjectSection = False
-                        blnSceneSection  = True
-    # Write post-compile file
-    with open(strPostFile+".new", mode='w',encoding='utf-8') as fileData:
-        for scene in lstScenes:
-            for line in lstScenes[scene]:
-                fileData.write(''.join(line)+"\n")
-    print("Done Compiling")
-
-### The magic! this parses our post-compiled .txt files.
-### The file is parsed and our lstFrames array is populated with text.
-### This will not run if we are scanning OR saving.
-def parsePreCompileFile_secondTry():
     global blnScanningDir,blnSavingGif,blnRunLoop
     blnObjectSection=False
     blnObjectIndex=False
@@ -660,7 +554,7 @@ if __name__ == '__main__':
     btnNext.configure(command=stepImageForward)
     btnPrevious.configure(command=stepImageBack)
     btnSave.configure(command=saveGif)
-    btnCompile.configure(command=parsePreCompileFile_secondTry)
+    btnCompile.configure(command=parsePreCompileFile)
 
     parsePostCompileFile()
     getWidthAndHeight()
@@ -668,6 +562,7 @@ if __name__ == '__main__':
 
     updateFileLists()
     updateImages(picDrawing)
+    window.update()
     window.after(0, updateLoop)
     window.mainloop()
 
