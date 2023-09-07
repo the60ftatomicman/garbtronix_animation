@@ -320,9 +320,9 @@ def parsePreCompileFile():
                                 newCommand[2]=str(int(newCommand[2])+xDiff)
                                 newCommand[3]=str(int(newCommand[3])+yDiff)
                                 lstLastSceneCommands[cmdIdx] = ",".join(newCommand)+'\n'
-                                for cmd in lstLastSceneCommands:
-                                    addObjectToScene(lstScenes[latestIdx],lstObjects,cmd)
-                                lstScenes[latestIdx].append(list("**"))
+                            for cmd in lstLastSceneCommands:
+                                addObjectToScene(lstScenes[latestIdx],lstObjects,cmd)
+                            lstScenes[latestIdx].append(list("**"))
                             intModifiedLoops-=1
                             latestIdx+=1
                         intModifiedLoops=1
@@ -359,7 +359,6 @@ def parsePreCompileFile():
                     if(regexSceneModifiedStart.match(line)):
                         blnSceneModifiedCommands=True
                         lstLastModifyCommands=[]
-                        # * M 1
                         modLineData=line.split("* M")
                         if(len(modLineData) > 1):
                             intModifiedLoops=int(modLineData[1].strip())
@@ -565,7 +564,6 @@ if __name__ == '__main__':
     window.update()
     window.after(0, updateLoop)
     window.mainloop()
-
 
 
 
