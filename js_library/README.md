@@ -1,29 +1,14 @@
-# Garbtronix Animation Library
+# Garbtronix Animation Library (Javascript Edition)
 
 My Personal ASCII animation tool
-Able to build GIFS and MP4's straight from text.
-
-![Ascii the world](./Docs/Imgs/Earth12Frame.gif)
-
-<sup>Built from this very suite.</sup>
+Able to push text to a div.
 
 ## Setup ##
 
-- Install Python 3 latest
-- Pip Install Dependancies
-    - ```pip install Pillow```
-
-    <sup>Does all of our GIF and IMG building</sup>
-    - ```pip install numpy```
-    - ```pip install opencv-python```
-    
-    <sup>Both of these are exclusively for MP4 generation</sup>
-- create the file ```<root>/pythonGifBuilder/example.txt```
-    - This is used for parsing our ascii art
-- Run ```python3 <root>/pythonGifBuilder/main.py```
-    - If it runs, great we've done it!
-
-![The chair will not be present](./Docs/Imgs/MainWindow.png)
+- Get something to host index.html
+- See index.html for how to setup the JS library.
+- I don't plan on supporting this, it's a bit outdated and the python app is better.
+- The pre-compiled script will be pushed to console.log as a post-compiled script.
 
 ---
 
@@ -209,7 +194,7 @@ Now lets talk SHORTCUTS!
 The Repeat Command (easiest command)
 
 ```
-    * R 0,1 L 1
+    * R 0,1 L 1 C 1
     *** E
 ```
 
@@ -218,32 +203,36 @@ The Repeat Command (easiest command)
         - in the case of the example above it's frame 0 to frame 1
         - NOTE: it's based on frame not drawing!
     - L 1 is how many loops of this section we want to do
+    - C 1 is how many "frames" we want. So thing that second # in the post-compile per frame/drawing.
 - *** E is the end of this command.
 
 The Modified Command in the scene section
 
 ```
-    * M 1
-    ** 2,1,0,1
+    * M 1 1
+    ** 2F1YN1
     *** E
 ```
 
 - * M indicates this is a Modified Frame
     - the 1 is how many modification frames will be written
+    - the second 1 is how many "frames" we want. So thing that second # in the post-compile per frame/drawing.
     - this will all make sense after I explain the ** lines.
-    - This is a shortcut to do things like...panning.
-- ** 1,0,0,1
+- ** 1F1XN0
     - This is a modify command. There can be multiple in a block here.
     - The first digit is the INDEX of the object we want to modify.
         - given our example above it'd be modifying the mouth.
         - indexing starts at 0
-    - The second digit is the intended FRAME we want to display for that object
+    - We can have MULTIPLE of these commands.
+    - F1 is which "index" of the object we want to use
         - given the example above I am asking to modify the mouth to use index 0; the OPEN mouth
-    - The third digit is the x modifier
-        - just put 0 if you dont want to move the X relative to the current position
-    - The fourth digit is the y modifier
-        - just put 0 if you dont want to move the Y relative to the current position
-    - *** E is the end of this command.
+    - YN1 is a direction modification. This is why the top #'s matter.
+        - I am asking to move the object 1 degrees on the Y access. 
+            - given the example above I am moving the mouth up 1 to where the nose kinda sits.
+        - Y can also be X (X access)
+        - N for negative, P for positive
+        - This is how I switch between indexes or do PANNING.
+- *** E is the end of this command.
 
 All of this together how I'd build an animation of a head panning
 
@@ -282,10 +271,10 @@ All of this together how I'd build an animation of a head panning
     ** head,0,0,0
     ** mouth,0,3,3
     *** E
-    * M 1
-    ** 2,1,0,0
+    * M 1 1
+    ** 2F1YN0
     *** E
     // Depending on how many frames I want of talking I'd modify this!
-    * R 0,1 L 5
+    * R 0,1 L 5 C 1
     *** E
 ```
