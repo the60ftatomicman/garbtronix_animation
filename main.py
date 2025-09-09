@@ -246,11 +246,11 @@ def parsePreCompileFile():
     regexObjectSection=compile('^(\*\*\*\*) Objects$')
     regexObjectName=compile('^[a-zA-Z0-9]{1,}')
     regexObjectStart=compile('^(\*)$')
-    regexObjectIdx=compile('^(\*\*) [0-9]$')
+    regexObjectIdx=compile('^(\*\*) [0-9]{1,}$')
     regexObjectEnd=compile('^(\*\*\*) E$')
     
     regexSceneSection=compile('^(\*\*\*\*) Scene$')
-    regexSceneStandardStart=compile('^(\*) [0-9]$')
+    regexSceneStandardStart=compile('^(\*) [0-9]{1,}$')
     regexSceneRepeatStart=compile('^(\*) R [0-9]')
     regexSceneModifiedStart=compile('^(\*) M [0-9]')
     regexSceneModifiedCommand=compile('^(\*\*) [0-9,]{1,}')
@@ -564,6 +564,7 @@ if __name__ == '__main__':
     window.update()
     window.after(0, updateLoop)
     window.mainloop()
+
 
 
 
