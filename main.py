@@ -47,8 +47,9 @@ intMaxChars_Width  = 0
 intMaxChars_Height = 0
 #
 time_LastModified  = 0
-# ---------- Compile Components 
-renderFont = ImageFont.truetype(dirRoot+"/fonts/lucon.ttf",encoding='unic',size=14)
+# ---------- Compile Components
+#renderFont = ImageFont.truetype('Menlo',size=10)
+renderFont = ImageFont.truetype(dirRoot+"/fonts/lucon.ttf",encoding='unic',size=20)
 #renderFont = ImageFont.truetype(dirRoot+"/fonts/FreeMono.ttf",encoding='unic',size=14)
 #renderFont = ImageFont.truetype(dirRoot+"/fonts/DroidSansMono.ttf",encoding='unic',size=14)
 #renderFont = ImageFont.truetype(dirRoot+"/fonts/jgs_Font.ttf",encoding='unic',size=14)
@@ -251,7 +252,7 @@ def parsePreCompileFile():
     
     regexSceneSection=compile('^(\*\*\*\*) Scene$')
     regexSceneStandardStart=compile('^(\*) [0-9]{1,}$')
-    regexSceneRepeatStart=compile('^(\*) R [0-9]')
+    regexSceneRepeatStart=compile('^(\*) R [0-9]{1,}')
     regexSceneModifiedStart=compile('^(\*) M [0-9]')
     regexSceneModifiedCommand=compile('^(\*\*) [0-9,]{1,}')
     regexSceneObject=compile('^(\*\*) [a-zA-Z]{1,}')
@@ -413,7 +414,10 @@ def updateFileLists():
             if (entry.path.endswith(".jpg")
                 or entry.path.endswith(".png")) and entry.is_file():
                 print("Found Frame: [%s]" % (entry.path))
-                frameNum = int(entry.name[5:entry.name.find(".png")])
+                endIdx = entry.name.find(".png")
+                if(entry.path.endswith(".jpg")):
+                    endIdx = entry.name.find(".jpg")
+                frameNum = int(entry.name[5:endIdx])
                 if(len(lstDrawing) < frameNum):
                     lstDrawing = lstDrawing + [None] * (frameNum-len(lstDrawing))
                 lstDrawing[frameNum-1] = entry.path
@@ -477,8 +481,8 @@ def saveGif():
         print("Saving to: "+dirRoot + filename + '.gif')
         images[0].save(dirRoot + "/" +filename + '.gif', format='GIF', append_images=images[1:], save_all=True,duration=([duration] * len(images)), loop=0)
         # Sadly a bug for windows!
-        if platform != "win32":
-            saveMp4(filename,images,images[0].width,images[0].height,int(txtFPS.get()))
+        #if platform != "win32":
+        saveMp4(filename,images,images[0].width,images[0].height,int(txtFPS.get()))
         blnSavingGif = False
     else:
         print("Cannot save, currently scanning")
@@ -486,7 +490,7 @@ def saveGif():
 ### For each image in lstDrawing, 
 ### compile and create a MP4 in the root dir
 def saveMp4(filename,images,width,height,fps):
-    out = VideoWriter(dirRoot+filename+'.mp4',VideoWriter_fourcc(*'MP4V'), fps, (width,height))
+    out = VideoWriter(dirRoot+ "/"+filename+'.mp4',VideoWriter_fourcc(*'MP4V'), fps, (width,height))
     for i in range(len(images)):
         out.write(numpy_array(images[i]))
     out.release()
@@ -531,10 +535,10 @@ def createFrameImgs():
             remove(filename)
     i = 0
     for frame in lstFrames:
-        renderImg = Image.new('RGB', (int(txtWidth.get()), int(txtHeight.get())), color=(255, 255, 255))
+        renderImg = Image.new('RGB', (int(txtWidth.get()), int(txtHeight.get())), color=(0, 0, 0))
         y = 0
         for line in frame:
-            ImageDraw.Draw(renderImg).text((0, y*renderFont.font.height),line, fill=(0, 0, 0),font=renderFont)
+            ImageDraw.Draw(renderImg).text((0, y*renderFont.font.height),line, fill=(255, 255, 255),font=renderFont)
             y += 1
         i+=1
         renderImg.save(dirScratch + '/Frame' + str(i)+ '.png', format='PNG')
@@ -564,7 +568,6 @@ if __name__ == '__main__':
     window.update()
     window.after(0, updateLoop)
     window.mainloop()
-
 
 
 
